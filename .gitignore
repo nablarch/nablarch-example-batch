@@ -100,7 +100,6 @@ target
 WebContent/META-INF/MANIFEST.MF
 
 ### Example Batch ###
-work/registration/input/*
 !.gitkee
 
 ## h2
