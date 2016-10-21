@@ -40,7 +40,6 @@ hs_err_pid*
 *.pydevproject
 .metadata
 .gradle
-tmp/
 *.tmp
 *.bak
 *.swp
