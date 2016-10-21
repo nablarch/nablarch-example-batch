@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Nablarch Toolbox">
+  <path id="classpath.common">
+    <pathelement location="resources" />
+    <path refid="maven.compile.classpath" />
+    <path refid="maven.plugin.classpath" />
+  </path>
+  
+  <target name="PublishedDoclet" description="プロジェクトの中から@Publishedが付いた要素の一覧を作成する">
+    <javadoc sourcepath="${executed.project.basedir}/src/main/java"
+             destdir="${executed.project.basedir}/target/apidocs"
+             Encoding="UTF-8"
+             classpathref="classpath.common"
+             failonerror="false" >
+      <!-- docletタグで、使用許可API一覧作成ツールのDocletクラスと、必要なクラスパスを設定する。 -->
+      <doclet name="nablarch.tool.published.doclet.PublishedDoclet" pathref="classpath.common">
+        <!-- 出力対象とするタグを指定する。指定しない場合には不要。 -->
+        <param name="-tag" value="${publish_config_tag}"/>
+        <!-- 使用許可API一覧の出力先ファイルを指定する。 -->
+        <param name="-output" value="${nablarch.tools.dir}/static-analysis/findbugs/published-config/production/${publish_config_name}.config"/>
+      </doclet>
+    </javadoc>
+  </target>
+</project>

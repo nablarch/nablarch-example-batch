@@ -1,0 +1,4 @@
+"BATCH_REQUEST_ID","BATCH_REQUEST_NAME","PROCESS_HALT_FLG","PROCESS_ACTIVE_FLG","SERVICE_AVAILABLE","RESUME_POINT"
+"FileDelete","ファイル削除","0","0","1",0
+"RegistrationPdfFile","PDFファイル登録","0","0","1",0
+"ImportZipCodeFile","住所ファイル登録","0","0","1",0

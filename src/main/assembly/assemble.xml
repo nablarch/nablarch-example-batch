@@ -1,0 +1,46 @@
+<assembly
+        xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+
+  <id>dist</id>
+  <formats>
+    <format>zip</format>
+  </formats>
+  <files>
+    <file>
+      <source>bin/run-batch.sh</source>
+      <outputDirectory>/${project.build.finalName}</outputDirectory>
+    </file>
+    <file>
+      <source>bin/run-batch.bat</source>
+      <outputDirectory>/${project.build.finalName}</outputDirectory>
+    </file>
+    <file>
+      <source>target/${project.build.finalName}-${env.classifier}.jar</source>
+      <outputDirectory>/${project.build.finalName}</outputDirectory>
+    </file>
+  </files>
+  <fileSets>
+    <!-- デフォルトで設定されているH2 Database Engineを使用する際に
+         必要なファイルをzipに含めるための設定
+         デフォルトのデータベースを使用しない場合、削除すること -->
+    <fileSet>
+      <directory>h2/db</directory>
+    </fileSet>
+    <!-- アプリが使用するフォーマット定義ファイルをzipに含めるための設定
+         フォーマット定義ファイルをサーバーに配置している場合、削除すること -->
+    <fileSet>
+      <directory>src/main/format</directory>
+    </fileSet>
+    <fileSet>
+      <directory>work</directory>
+    </fileSet>
+  </fileSets>
+  <dependencySets>
+    <dependencySet>
+      <useProjectArtifact>false</useProjectArtifact>
+      <outputDirectory>lib</outputDirectory>
+    </dependencySet>
+  </dependencySets>
+</assembly>

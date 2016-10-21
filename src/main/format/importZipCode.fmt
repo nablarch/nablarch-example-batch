@@ -1,0 +1,54 @@
+#-------------------------------------------------------------------------------
+# ZIPコードCSVフォーマット定義
+#-------------------------------------------------------------------------------
+file-type:        "Variable"
+text-encoding:    "UTF-8"
+record-separator: "\r\n"
+field-separator:  ","
+quoting-delimiter: "\""
+
+[Classifier] # レコードタイプ識別フィールド定義
+1   recordKbn   X(1) #       データ区分
+
+[header]  # ヘッダーレコード
+recordKbn = "1"
+1   recordKbn                   X(1)
+2   localGovernmentCode     N #"全国地方公共団体コード"
+3   zipCode5digit           N #"郵便番号（5桁）"
+4   zipCode7digit           N #"郵便番号（7桁）"
+5   prefectureKana          N #"都道府県名カナ"
+6   cityKana                N #"市区町村名カナ"
+7   addressKana             N #"町域名カナ"
+8   prefectureKanji         N #"都道府県名漢字"
+9  cityKanji               N #"市区町村名漢字"
+10   addressKanji            N #"町域名漢字"
+11  multipleZipCodes        N #"一町域が二以上の郵便番号"
+12  numberedEveryKoaza      N #"小字毎に番地が起番されている町域"
+13  addressWithChome        N #"丁目を有する町域"
+14  multipleAddress         N #"一つの郵便番号で二以上の町域"
+15  updateData              N #"更新"
+16  updateDataReason        N #"変更理由"
+
+[data]
+recordKbn = "2"
+1   recordKbn                   X(1)
+2   localGovernmentCode     N #"全国地方公共団体コード"
+3   zipCode5digit           N #"郵便番号（5桁）"
+4   zipCode7digit           N #"郵便番号（7桁）"
+5   prefectureKana          N #"都道府県名カナ"
+6   cityKana                N #"市区町村名カナ"
+7   addressKana             N #"町域名カナ"
+8   prefectureKanji         N #"都道府県名漢字"
+9  cityKanji               N #"市区町村名漢字"
+10   addressKanji            N #"町域名漢字"
+11  multipleZipCodes        N #"一町域が二以上の郵便番号"
+12  numberedEveryKoaza      N #"小字毎に番地が起番されている町域"
+13  addressWithChome        N #"丁目を有する町域"
+14  multipleAddress         N #"一つの郵便番号で二以上の町域"
+15  updateData              N #"更新"
+16  updateDataReason        N #"変更理由"
+
+[end]
+recordKbn = "9"
+1   recordKbn                   X(1)  "9"    # データ区分
+2   ?filler                     X(419)      # 空白領域

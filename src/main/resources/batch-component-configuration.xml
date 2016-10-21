@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component-configuration
+        xmlns="http://tis.co.jp/nablarch/component-configuration"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  /component-configuration.xsd">
+
+  <!-- テーブル定義 -->
+  <import file="nablarch/schema-config.xml" />
+
+  <!-- バリデーション機能 -->
+  <import file="validation.xml"/>
+
+  <!-- 環境設定ファイル -->
+  <config-file file="common.config" />
+  <config-file file="env.config" />
+
+  <!--
+  バッチ固有の設定読み込み
+  -->
+  <!-- データベース設定-->
+  <import file="nablarch/batch/db-for-batch.xml" />
+  <import file="data-source.xml"/>
+
+
+  <!-- ファイルパス設置 -->
+  <import file="nablarch/batch/filepath-for-batch.xml" />
+  <!-- 処理停止機能 -->
+  <import file="nablarch/common/standalone/process-stop.xml" />
+  <!-- コミットログ機能 -->
+  <!--<import file="nablarch/common/standalone/commit-log.xml" />-->
+  <!-- マルチスレッド実行制御機能 -->
+  <import file="nablarch/common/standalone/multi-thread.xml" />
+  <!-- ループ・トランザクション制御機能 -->
+  <import file="nablarch/batch/loop-transaction.xml" />
+  <!-- データリード機能 -->
+  <import file="nablarch/batch/batch-data-read.xml" />
+
+  <!-- ハンドラキュー構成 -->
+  <list name="handlerQueue">
+
+    <!-- ステータスコードを終了コードに変換するハンドラ -->
+    <component class="nablarch.fw.handler.StatusCodeConvertHandler" />
+
+    <!-- グローバルエラーハンドラ -->
+    <component class="nablarch.fw.handler.GlobalErrorHandler" />
+
+    <!-- データベース接続ハンドラ(初期処理/終了処理用) -->
+    <component-ref name="dbConnectionManagementHandler" />
+
+    <!-- トランザクション制御ハンドラ(初期処理/終了処理用) -->
+    <component-ref name="transactionManagementHandler" />
+
+    <!-- ディスパッチ -->
+    <component class="nablarch.fw.handler.RequestPathJavaPackageMapping">
+      <property name="basePackage" value="${nablarch.commonProperty.basePackage}" />
+      <property name="immediate" value="false" />
+    </component>
+
+    <!-- マルチスレッド実行制御ハンドラ -->
+    <component-ref name="multiThreadExecutionHandler" />
+
+    <!-- データベース接続ハンドラ(業務処理用) -->
+    <component-ref name="dbConnectionManagementHandler" />
+
+    <!-- トランザクションループ制御ハンドラ -->
+    <component-ref name="loopHandler" />
+
+    <!-- 処理停止制御ハンドラ -->
+    <component-ref name="processStopHandler" />
+
+    <!-- データリードハンドラ -->
+    <component-ref name="dataReadHandler" />
+  </list>
+
+  <!-- 初期化が必要なコンポーネント -->
+  <component name="initializer"
+             class="nablarch.core.repository.initialization.BasicApplicationInitializer">
+    <property name="initializeList">
+      <list>
+        <!-- common/date.xml:業務日付コンポーネント -->
+        <component-ref name="businessDateProvider" />
+        <!-- batch/handler/processStop.xml:処理停止ハンドラ -->
+        <component-ref name="processStopHandler" />
+      </list>
+    </property>
+  </component>
+</component-configuration>
