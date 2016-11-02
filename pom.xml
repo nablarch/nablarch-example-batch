@@ -6,12 +6,12 @@
   <parent>
     <groupId>com.nablarch.archetype</groupId>
     <artifactId>nablarch-archetype-parent</artifactId>
-    <version>5u6</version>
+    <version>5u7</version>
   </parent>
 
   <groupId>com.nablarch.example</groupId>
   <artifactId>nablarch-example-batch</artifactId>
-  <version>1.0.0</version>
+  <version>5u7</version>
   <packaging>jar</packaging>
 
   <properties>
@@ -193,7 +193,7 @@
       <dependency>
         <groupId>com.nablarch.profile</groupId>
         <artifactId>nablarch-bom</artifactId>
-        <version>5u6</version>
+        <version>5u7</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -368,7 +368,7 @@
               <groupId>com.nablarch.framework</groupId>
               <artifactId>nablarch-testing</artifactId>
               <!-- プラグインに内包するモジュールはバージョン指定必須 -->
-              <version>1.0.6</version>
+              <version>1.0.7</version>
             </plugin>
           </plugins>
         </configuration>
