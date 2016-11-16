@@ -39,6 +39,12 @@
   <!-- データリード機能 -->
   <import file="nablarch/batch/batch-data-read.xml" />
 
+  <component name="process-identification-transaction" class="nablarch.core.db.transaction.SimpleDbTransactionManager">
+    <property name="connectionFactory" ref="connectionFactory" />
+    <property name="transactionFactory" ref="transactionFactory" />
+    <property name="dbTransactionName" value="process-identification-transaction" />
+  </component>
+
   <!-- ハンドラキュー構成 -->
   <list name="handlerQueue">
 

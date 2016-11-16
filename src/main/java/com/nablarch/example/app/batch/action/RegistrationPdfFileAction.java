@@ -7,10 +7,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.Random;
+import java.util.UUID;
 
 import nablarch.common.dao.DeferredEntityList;
 import nablarch.common.dao.UniversalDao;
 import nablarch.core.date.SystemTimeUtil;
+import nablarch.core.db.connection.AppDbConnection;
+import nablarch.core.db.statement.SqlPStatement;
+import nablarch.core.db.transaction.SimpleDbTransactionExecutor;
+import nablarch.core.db.transaction.SimpleDbTransactionManager;
 import nablarch.core.repository.SystemRepository;
 import nablarch.core.util.FileUtil;
 import nablarch.core.util.annotation.Published;
@@ -37,17 +42,40 @@ public class RegistrationPdfFileAction extends BatchAction<FileCreateRequest> {
     /** 設定キー：作業ファイルパス */
     private static final String FILE_PATH_KEY_WORK = "RegistrationPdfFile.batch.work";
 
+    /** 処理識別ID */
+    private final String processIdentificationId = UUID.randomUUID().toString();
+
     /** DeferredEntityListリソース解放の為内部保持 */
     private FileCreateRequestReader reader;
 
     @Override
     public DataReader<FileCreateRequest> createReader(ExecutionContext context) {
 
-        DeferredEntityList<FileCreateRequest> entityList
-            = (DeferredEntityList<FileCreateRequest>) UniversalDao.defer().findAll(FileCreateRequest.class);
+        updateProcessIdentificationId();
+
+        DeferredEntityList<FileCreateRequest> entityList =
+                (DeferredEntityList<FileCreateRequest>) UniversalDao.defer().findAllBySqlFile(
+                        FileCreateRequest.class, "FIND_BY_PROCESS_IDENTIFICATION_ID", new String[]{ processIdentificationId });
 
         reader = new FileCreateRequestReader(entityList);
         return reader;
+    }
+
+    /**
+     * 処理識別IDを更新する。
+     */
+    private void updateProcessIdentificationId() {
+        SimpleDbTransactionManager dbTransactionManager = SystemRepository.get("process-identification-transaction");
+        new SimpleDbTransactionExecutor<Void>(dbTransactionManager) {
+            @Override
+            public Void execute(AppDbConnection connection) {
+                final SqlPStatement statement
+                        = connection.prepareStatementBySqlId(FileCreateRequest.class.getName() + "#UPDATE_PROCESS_IDENTIFICATION_ID");
+                statement.setString(1, processIdentificationId);
+                statement.executeUpdate();
+                return null;
+            }
+        }.doTransaction();
     }
 
     @Override
@@ -89,6 +117,21 @@ public class RegistrationPdfFileAction extends BatchAction<FileCreateRequest> {
     @Override
     public void terminate(Result result, ExecutionContext context) {
         reader.close(context);
+    }
+
+    @Override
+    protected void transactionFailure(FileCreateRequest inputData, ExecutionContext context) {
+        SimpleDbTransactionManager dbTransactionManager = SystemRepository.get("process-identification-transaction");
+        new SimpleDbTransactionExecutor<Void>(dbTransactionManager) {
+            @Override
+            public Void execute(AppDbConnection connection) {
+                final SqlPStatement statement
+                        = connection.prepareStatementBySqlId(FileCreateRequest.class.getName() + "#CLEAR_PROCESS_IDENTIFICATION_ID");
+                statement.setString(1, processIdentificationId);
+                statement.executeUpdate();
+                return null;
+            }
+        }.doTransaction();
     }
 
     /**
