@@ -11,7 +11,7 @@ import java.util.List;
 
 import nablarch.common.dao.UniversalDao;
 import nablarch.core.date.SystemTimeUtil;
-import nablarch.core.db.transaction.SimpleDbTransactionManager;
+import nablarch.core.message.ApplicationException;
 import nablarch.core.repository.SystemRepository;
 import nablarch.core.repository.di.DiContainer;
 import nablarch.core.repository.di.config.xml.XmlComponentDefinitionLoader;
@@ -20,6 +20,7 @@ import nablarch.core.util.FileUtil;
 import nablarch.fw.DataReader;
 import nablarch.test.core.db.DbAccessTestSupport;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -43,10 +44,14 @@ public class RegistrationPdfFileActionTest {
     private static final String[] TEST_DATA_ID = { "1", "2" };
     private static final String[] TEST_DATA_NAME = { "test1.pdf", "test2.pdf" };
 
+    /** DBアクセスを伴うテスト用のサポートクラス */
+    private DbAccessTestSupport support = new DbAccessTestSupport(getClass());
+
     @Before
     public void setUp() throws Exception {
         SystemRepository.load(new DiContainer(new XmlComponentDefinitionLoader("registration-pdf-file.xml")));
-        new DbAccessTestSupport(getClass()).beginTransactions();
+
+        support.beginTransactions();
 
         // FileCreateRequest初期化
         Date sysDate = SystemTimeUtil.getDate();
@@ -63,6 +68,13 @@ public class RegistrationPdfFileActionTest {
         FileData fileData = new FileData();
         fileData.setFileDataId(TEST_DATA_ID[0]);
         UniversalDao.delete(fileData);
+
+        support.commitTransactions();
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        support.endTransactions();
     }
 
     @Test
@@ -72,15 +84,53 @@ public class RegistrationPdfFileActionTest {
 
         DataReader<FileCreateRequest> reader = new RegistrationPdfFileAction().createReader(null);
 
+        // 処理識別IDが全て更新されていること
+        for (FileCreateRequest entity : UniversalDao.findAll(FileCreateRequest.class)) {
+            assertThat(entity.getProcessIdentificationId(), not(nullValue()));
+        }
 
         //リーダーのファイル名リスト作成
         List<String> fileList = new ArrayList<String>();
         while (reader.hasNext(null)) {
             fileList.add(reader.read(null).getFileName());
         }
-        new SimpleDbTransactionManager().endTransaction();
+
         //リーダーのファイル名取得確認
         assertThat(fileList, is(fileComparisonList));
+    }
+
+    @Test
+    public void testCreateReaderMultiProcess() {
+
+        DataReader<FileCreateRequest> reader = new RegistrationPdfFileAction().createReader(null);
+        assertThat(reader.hasNext(null), is(true));
+
+        try {
+            new RegistrationPdfFileAction().createReader(null);
+            fail("登録対象が存在しないためエラーとなる");
+        } catch (ApplicationException e) {
+            assertThat(e.getMessages().size(), is(1));
+            assertThat(e.getMessages().get(0).getMessageId(), is("error.RegistrationFile.nothing"));
+        }
+    }
+
+    @Test
+    public void testTransactionFailure() {
+        RegistrationPdfFileAction action = new RegistrationPdfFileAction();
+
+        action.createReader(null);
+
+        // 処理識別IDが全て更新されていること
+        for (FileCreateRequest entity : UniversalDao.findAll(FileCreateRequest.class)) {
+            assertThat(entity.getProcessIdentificationId(), not(nullValue()));
+        }
+
+        action.transactionFailure(null, null);
+
+        // 処理識別IDが全てnullに更新されていること
+        for (FileCreateRequest entity : UniversalDao.findAll(FileCreateRequest.class)) {
+            assertThat(entity.getProcessIdentificationId(), is(nullValue()));
+        }
     }
 
     @Test
@@ -114,6 +164,5 @@ public class RegistrationPdfFileActionTest {
         assertFalse(new File(SystemRepository.getString(FILE_PATH_KEY_WORK), TEST_DATA_NAME[0]).exists());
         //登録済みファイルのDB削除確認
         assertEquals(UniversalDao.delete(inputData), 0);
-        new SimpleDbTransactionManager().endTransaction();
     }
 }
