@@ -44,7 +44,9 @@ public class RegistrationPdfFileAction extends BatchAction<FileCreateRequest> {
     public DataReader<FileCreateRequest> createReader(ExecutionContext context) {
 
         DeferredEntityList<FileCreateRequest> entityList
-            = (DeferredEntityList<FileCreateRequest>) UniversalDao.defer().findAll(FileCreateRequest.class);
+            = (DeferredEntityList<FileCreateRequest>) UniversalDao.defer()
+                .findAllBySqlFile(FileCreateRequest.class,
+                "com.nablarch.example.app.batch.action.fileDelete#GET_MISHORI_FILE_INFO");
 
         reader = new FileCreateRequestReader(entityList);
         return reader;
@@ -80,10 +82,25 @@ public class RegistrationPdfFileAction extends BatchAction<FileCreateRequest> {
         // 登録済みのファイルを削除
         FileUtil.deleteFile(workFile);
 
-        // ファイルリクエスト削除
-        UniversalDao.delete(inputData);
-
         return new Success();
+    }
+
+    /**
+     * 正常終了時には、ステータスを処理済みに更新する。
+     */
+    @Override
+    protected void transactionSuccess(final FileCreateRequest inputData, final ExecutionContext context) {
+        inputData.setStatus("1");
+        UniversalDao.update(inputData);
+    }
+
+    /**
+     * 異常終了時には、ステータスを異常終了に更新する。
+     */
+    @Override
+    protected void transactionFailure(final FileCreateRequest inputData, final ExecutionContext context) {
+        inputData.setStatus("2");
+        UniversalDao.update(inputData);
     }
 
     @Override
