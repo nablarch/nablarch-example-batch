@@ -10,6 +10,7 @@ import java.util.Random;
 
 import nablarch.common.dao.DeferredEntityList;
 import nablarch.common.dao.UniversalDao;
+import nablarch.core.beans.BeanUtil;
 import nablarch.core.date.SystemTimeUtil;
 import nablarch.core.repository.SystemRepository;
 import nablarch.core.util.FileUtil;
@@ -37,19 +38,15 @@ public class RegistrationPdfFileAction extends BatchAction<FileCreateRequest> {
     /** 設定キー：作業ファイルパス */
     private static final String FILE_PATH_KEY_WORK = "RegistrationPdfFile.batch.work";
 
-    /** DeferredEntityListリソース解放の為内部保持 */
-    private FileCreateRequestReader reader;
-
     @Override
     public DataReader<FileCreateRequest> createReader(ExecutionContext context) {
 
         DeferredEntityList<FileCreateRequest> entityList
             = (DeferredEntityList<FileCreateRequest>) UniversalDao.defer()
                 .findAllBySqlFile(FileCreateRequest.class,
-                "com.nablarch.example.app.batch.action.fileDelete#GET_MISHORI_FILE_INFO");
+                "com.nablarch.example.app.batch.action.RegistrationPdfFileAction#GET_MISHORI_FILE_INFO");
 
-        reader = new FileCreateRequestReader(entityList);
-        return reader;
+        return new FileCreateRequestReader(entityList);
     }
 
     @Override
@@ -90,8 +87,7 @@ public class RegistrationPdfFileAction extends BatchAction<FileCreateRequest> {
      */
     @Override
     protected void transactionSuccess(final FileCreateRequest inputData, final ExecutionContext context) {
-        inputData.setStatus("1");
-        UniversalDao.update(inputData);
+        updateStatus(inputData, "1");
     }
 
     /**
@@ -99,13 +95,19 @@ public class RegistrationPdfFileAction extends BatchAction<FileCreateRequest> {
      */
     @Override
     protected void transactionFailure(final FileCreateRequest inputData, final ExecutionContext context) {
-        inputData.setStatus("2");
-        UniversalDao.update(inputData);
+        updateStatus(inputData, "2");
     }
 
-    @Override
-    public void terminate(Result result, ExecutionContext context) {
-        reader.close(context);
+    /**
+     * FileCreateRequest のレコードのステータスを更新する。
+     *
+     * @param inputData 更新対象
+     * @param status 更新するステータス
+     */
+    private void updateStatus(final FileCreateRequest inputData, String status) {
+        FileCreateRequest updateData = BeanUtil.createAndCopy(FileCreateRequest.class, inputData);
+        updateData.setStatus(status);
+        UniversalDao.update(updateData);
     }
 
     /**

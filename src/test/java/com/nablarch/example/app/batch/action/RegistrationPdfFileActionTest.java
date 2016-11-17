@@ -43,12 +43,11 @@ public class RegistrationPdfFileActionTest {
     private static final String[] TEST_DATA_ID = { "1", "2" };
     private static final String[] TEST_DATA_NAME = { "test1.pdf", "test2.pdf" };
 
-    private DbAccessTestSupport transaction;
+    private DbAccessTestSupport transaction = new DbAccessTestSupport(getClass());
 
     @Before
     public void setUp() throws Exception {
         SystemRepository.load(new DiContainer(new XmlComponentDefinitionLoader("registration-pdf-file.xml")));
-        transaction = new DbAccessTestSupport(getClass());
         transaction.beginTransactions();
 
         // FileCreateRequest初期化
@@ -71,15 +70,21 @@ public class RegistrationPdfFileActionTest {
     }
     @After
     public void tearDown() {
-        if (transaction != null) {
-            transaction.endTransactions();
-        }
+        transaction.endTransactions();
     }
 
     @Test
     public void testCreateReader() {
         //テスト比較データ作成
         List<String> fileComparisonList = Arrays.asList(TEST_DATA_NAME);
+
+        // 処理済みのため、対象として取得されないデータを作成
+        FileCreateRequest dummy = new FileCreateRequest();
+        dummy.setFileId("3");
+        dummy.setFileName("dummy.pdf");
+        dummy.setCreateTime(SystemTimeUtil.getDate());
+        dummy.setStatus("1");
+        UniversalDao.insert(dummy);
 
         DataReader<FileCreateRequest> reader = new RegistrationPdfFileAction().createReader(null);
 
