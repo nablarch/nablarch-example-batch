@@ -44,7 +44,7 @@ public class RegistrationPdfFileAction extends BatchAction<FileCreateRequest> {
         DeferredEntityList<FileCreateRequest> entityList
             = (DeferredEntityList<FileCreateRequest>) UniversalDao.defer()
                 .findAllBySqlFile(FileCreateRequest.class,
-                "com.nablarch.example.app.batch.action.RegistrationPdfFileAction#GET_MISHORI_FILE_INFO");
+                "GET_MISHORI_FILE_INFO");
 
         return new FileCreateRequestReader(entityList);
     }
