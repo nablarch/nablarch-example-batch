@@ -9,9 +9,10 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import com.nablarch.example.app.entity.FileCreateRequest;
+import com.nablarch.example.app.entity.FileData;
 import nablarch.common.dao.UniversalDao;
 import nablarch.core.date.SystemTimeUtil;
-import nablarch.core.db.transaction.SimpleDbTransactionManager;
 import nablarch.core.repository.SystemRepository;
 import nablarch.core.repository.di.DiContainer;
 import nablarch.core.repository.di.config.xml.XmlComponentDefinitionLoader;
@@ -20,11 +21,10 @@ import nablarch.core.util.FileUtil;
 import nablarch.fw.DataReader;
 import nablarch.test.core.db.DbAccessTestSupport;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.nablarch.example.app.entity.FileCreateRequest;
-import com.nablarch.example.app.entity.FileData;
 /**
  * 常駐起動バッチテストクラス。
  * @author Nabu Rakutaro
@@ -43,10 +43,12 @@ public class RegistrationPdfFileActionTest {
     private static final String[] TEST_DATA_ID = { "1", "2" };
     private static final String[] TEST_DATA_NAME = { "test1.pdf", "test2.pdf" };
 
+    private DbAccessTestSupport transaction = new DbAccessTestSupport(getClass());
+
     @Before
     public void setUp() throws Exception {
         SystemRepository.load(new DiContainer(new XmlComponentDefinitionLoader("registration-pdf-file.xml")));
-        new DbAccessTestSupport(getClass()).beginTransactions();
+        transaction.beginTransactions();
 
         // FileCreateRequest初期化
         Date sysDate = SystemTimeUtil.getDate();
@@ -54,8 +56,10 @@ public class RegistrationPdfFileActionTest {
         for (int i = 0; i < TEST_DATA_ID.length; i++) {
             insertFIle.setFileId(TEST_DATA_ID[i]);
             UniversalDao.delete(insertFIle);
+
             insertFIle.setFileName(TEST_DATA_NAME[i]);
             insertFIle.setCreateTime(sysDate);
+            insertFIle.setStatus("0");
             UniversalDao.insert(insertFIle);
         }
 
@@ -64,11 +68,23 @@ public class RegistrationPdfFileActionTest {
         fileData.setFileDataId(TEST_DATA_ID[0]);
         UniversalDao.delete(fileData);
     }
+    @After
+    public void tearDown() {
+        transaction.endTransactions();
+    }
 
     @Test
     public void testCreateReader() {
         //テスト比較データ作成
         List<String> fileComparisonList = Arrays.asList(TEST_DATA_NAME);
+
+        // 処理済みのため、対象として取得されないデータを作成
+        FileCreateRequest dummy = new FileCreateRequest();
+        dummy.setFileId("3");
+        dummy.setFileName("dummy.pdf");
+        dummy.setCreateTime(SystemTimeUtil.getDate());
+        dummy.setStatus("1");
+        UniversalDao.insert(dummy);
 
         DataReader<FileCreateRequest> reader = new RegistrationPdfFileAction().createReader(null);
 
@@ -78,7 +94,6 @@ public class RegistrationPdfFileActionTest {
         while (reader.hasNext(null)) {
             fileList.add(reader.read(null).getFileName());
         }
-        new SimpleDbTransactionManager().endTransaction();
         //リーダーのファイル名取得確認
         assertThat(fileList, is(fileComparisonList));
     }
@@ -112,8 +127,42 @@ public class RegistrationPdfFileActionTest {
         //登録済みファイルの削除確認
         assertFalse(targetFile.exists());
         assertFalse(new File(SystemRepository.getString(FILE_PATH_KEY_WORK), TEST_DATA_NAME[0]).exists());
-        //登録済みファイルのDB削除確認
-        assertEquals(UniversalDao.delete(inputData), 0);
-        new SimpleDbTransactionManager().endTransaction();
     }
+
+    /**
+     * 成功時にステータスが適切に書き換わること。
+     */
+    @Test
+    public void testSuccess() {
+        //テスト対象クラス
+        RegistrationPdfFileAction targetClass = new RegistrationPdfFileAction();
+
+        //テスト対処クラスパラメータ作成
+        FileCreateRequest inputData = UniversalDao.findById(FileCreateRequest.class, TEST_DATA_ID[0]);
+
+        targetClass.transactionSuccess(inputData, null);
+
+        //登録済みファイルのDBステータス確認
+        FileCreateRequest result = UniversalDao.findById(FileCreateRequest.class, inputData.getFileId());
+        assertThat(result.getStatus(), is("1"));
+    }
+
+    /**
+     * 失敗時にステータスが適切に書き換わること。
+     */
+    @Test
+    public void testFailure() {
+        //テスト対象クラス
+        RegistrationPdfFileAction targetClass = new RegistrationPdfFileAction();
+
+        //テスト対処クラスパラメータ作成
+        FileCreateRequest inputData = UniversalDao.findById(FileCreateRequest.class, TEST_DATA_ID[0]);
+
+        targetClass.transactionFailure(inputData, null);
+
+        //登録済みファイルのDBステータス確認
+        FileCreateRequest result = UniversalDao.findById(FileCreateRequest.class, inputData.getFileId());
+        assertThat(result.getStatus(), is("2"));
+    }
+
 }
