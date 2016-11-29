@@ -8,7 +8,6 @@ import java.nio.file.Paths;
 import java.util.Date;
 import java.util.Random;
 
-import nablarch.common.dao.DeferredEntityList;
 import nablarch.common.dao.UniversalDao;
 import nablarch.core.beans.BeanUtil;
 import nablarch.core.date.SystemTimeUtil;
@@ -40,13 +39,7 @@ public class RegistrationPdfFileAction extends BatchAction<FileCreateRequest> {
 
     @Override
     public DataReader<FileCreateRequest> createReader(ExecutionContext context) {
-
-        DeferredEntityList<FileCreateRequest> entityList
-            = (DeferredEntityList<FileCreateRequest>) UniversalDao.defer()
-                .findAllBySqlFile(FileCreateRequest.class,
-                "GET_MISHORI_FILE_INFO");
-
-        return new FileCreateRequestReader(entityList);
+        return new FileCreateRequestReader();
     }
 
     @Override

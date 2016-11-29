@@ -5,10 +5,18 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  /component-configuration.xsd">
 
-    <!-- 環境設定ファイル -->
-    <import file="resident-batch-component-configuration.xml"/>
+  <!-- com.nablarch.example.app.batch.action.RegistrationPdfFileActionの設定ファイル -->
 
-    <!-- バッチ個別設定の読み込み -->
-    <config-file file="batch-config/registration-pdf-file.config" />
+  <!-- 環境設定ファイル -->
+  <import file="resident-batch-component-configuration.xml" />
+
+  <!-- バッチ個別設定の読み込み -->
+  <config-file file="batch-config/registration-pdf-file.config" />
+
+  <component name="myTran" class="nablarch.core.db.transaction.SimpleDbTransactionManager">
+    <property name="connectionFactory" ref="connectionFactory" />
+    <property name="transactionFactory" ref="transactionFactory" />
+    <property name="dbTransactionName" value="myTran" />
+  </component>
 
 </component-configuration>
