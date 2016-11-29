@@ -85,12 +85,13 @@ public class RegistrationPdfFileActionTest {
         dummy.setCreateTime(SystemTimeUtil.getDate());
         dummy.setStatus("1");
         UniversalDao.insert(dummy);
+        transaction.commitTransactions();
 
         DataReader<FileCreateRequest> reader = new RegistrationPdfFileAction().createReader(null);
 
 
         //リーダーのファイル名リスト作成
-        List<String> fileList = new ArrayList<String>();
+        List<String> fileList = new ArrayList<>();
         while (reader.hasNext(null)) {
             fileList.add(reader.read(null).getFileName());
         }
