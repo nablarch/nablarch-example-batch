@@ -25,8 +25,6 @@
 
   <!-- ファイルパス設置 -->
   <import file="nablarch/batch/filepath-for-batch.xml" />
-  <!-- 処理停止機能 -->
-  <import file="nablarch/common/standalone/process-stop.xml" />
   <!-- コミットログ機能 -->
   <!--<import file="nablarch/common/standalone/commit-log.xml" />-->
   <!-- マルチスレッド実行制御機能 -->
@@ -65,9 +63,6 @@
 
     <!-- トランザクションループ制御ハンドラ -->
     <component-ref name="loopHandler" />
-
-    <!-- 処理停止制御ハンドラ -->
-    <component-ref name="processStopHandler" />
 
     <!-- データリードハンドラ -->
     <component-ref name="dataReadHandler" />
