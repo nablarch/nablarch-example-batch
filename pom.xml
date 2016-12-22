@@ -6,12 +6,12 @@
   <parent>
     <groupId>com.nablarch.archetype</groupId>
     <artifactId>nablarch-archetype-parent</artifactId>
-    <version>5u7</version>
+    <version>5u8</version>
   </parent>
 
   <groupId>com.nablarch.example</groupId>
   <artifactId>nablarch-example-batch</artifactId>
-  <version>5u7</version>
+  <version>5u8</version>
   <packaging>jar</packaging>
 
   <properties>
@@ -193,7 +193,7 @@
       <dependency>
         <groupId>com.nablarch.profile</groupId>
         <artifactId>nablarch-bom</artifactId>
-        <version>5u7</version>
+        <version>5u8</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -242,7 +242,6 @@
     <dependency>
       <groupId>org.apache.geronimo.specs</groupId>
       <artifactId>geronimo-jpa_2.0_spec</artifactId>
-      <version>1.1</version>
     </dependency>
 
     <dependency>
