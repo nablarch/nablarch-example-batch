@@ -70,10 +70,10 @@ local.properties
 
 
 ## IntelliJ ##
-*.iml
+#*.iml
 
 ## Directory-based project format:
-.idea/
+#.idea/
 
 ## File-based project format:
 *.ipr
@@ -113,3 +113,35 @@ work/test/importZipCode/*.csv
 
 ## GSP output
 gsp-target/*
+
+
+### JetBrains template
+.idea/dataSources/
+.idea/*.ids
+.idea/*.xml
+.idea/artifacts
+.idea/copyright
+!.idea/misc.xml
+!.idea/modules.xml
+!.idea/dictionaries
+
+
+## File-based project format:
+*.iws
+
+## Plugin-specific files:
+
+# IntelliJ
+/out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
