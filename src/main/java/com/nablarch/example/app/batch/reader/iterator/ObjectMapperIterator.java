@@ -9,9 +9,10 @@ import java.util.Iterator;
  * {@link ObjectMapper}から要素を抜き出して返却するイテレータクラス。
  *
  * @param <E> {@link ObjectMapper}から変換するオブジェクトの型
+ * @author Nabu Rakutaro
  */
 @Published
-public class ObjectMapperIterator<E> implements Iterator {
+public class ObjectMapperIterator<E> implements Iterator<E> {
 
     /**
      * イテレート対象のマッパ

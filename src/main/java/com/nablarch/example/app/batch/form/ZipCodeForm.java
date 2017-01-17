@@ -11,6 +11,7 @@ import nablarch.core.validation.ee.Required;
 /**
  * {@link nablarch.fw.DataReader} が読み込んだデータレコードをバインドし、バリデーションするフォームクラス。
  * <p>
+ * @author Nabu Rakutaro
  */
 @Csv(properties = { "localGovernmentCode", "zipCode5digit", "zipCode7digit",
         "prefectureKana", "cityKana", "addressKana",

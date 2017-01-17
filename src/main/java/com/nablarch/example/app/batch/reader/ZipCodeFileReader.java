@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 /**
  * 住所ファイルを読み込むためのデータリーダクラス。
  * <p>
+ * @author Nabu Rakutaro
  */
 @Published
 public class ZipCodeFileReader implements DataReader<ZipCodeForm> {

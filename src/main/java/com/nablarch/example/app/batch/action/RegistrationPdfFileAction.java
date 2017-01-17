@@ -38,12 +38,12 @@ public class RegistrationPdfFileAction extends BatchAction<FileCreateRequest> {
     private static final String FILE_PATH_KEY_WORK = "RegistrationPdfFile.batch.work";
 
     @Override
-    public DataReader<FileCreateRequest> createReader(ExecutionContext context) {
+    public DataReader<FileCreateRequest> createReader(ExecutionContext ctx) {
         return new FileCreateRequestReader();
     }
 
     @Override
-    public Result handle(FileCreateRequest inputData, ExecutionContext context) {
+    public Result handle(FileCreateRequest inputData, ExecutionContext ctx) {
 
         // 対象ファイル名取得
         String fileName = inputData.getFileName();
@@ -97,7 +97,7 @@ public class RegistrationPdfFileAction extends BatchAction<FileCreateRequest> {
      * @param inputData 更新対象
      * @param status 更新するステータス
      */
-    private void updateStatus(final FileCreateRequest inputData, String status) {
+    private static void updateStatus(final FileCreateRequest inputData, String status) {
         FileCreateRequest updateData = BeanUtil.createAndCopy(FileCreateRequest.class, inputData);
         updateData.setStatus(status);
         UniversalDao.update(updateData);
@@ -110,7 +110,7 @@ public class RegistrationPdfFileAction extends BatchAction<FileCreateRequest> {
      * @return 読み込んだバイト配列
      * @throws RuntimeException ファイルが見つからない、アクセスできないときなど
      */
-    protected byte[] readFileToByte(File file) {
+    byte[] readFileToByte(File file) {
         Path path = Paths.get(file.getAbsolutePath());
         try {
             return Files.readAllBytes(path);

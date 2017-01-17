@@ -5,6 +5,8 @@ import nablarch.core.validation.ee.DomainManager;
 
 /**
  * {@link DomainManager}の実装クラス。
+ * 
+ * @author Nabu Rakutaro
  */
 @Published(tag = "architect")
 public class ExampleDomainManager implements DomainManager<ExampleDomainType> {

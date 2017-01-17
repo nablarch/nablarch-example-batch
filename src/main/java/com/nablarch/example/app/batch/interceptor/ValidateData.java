@@ -30,6 +30,8 @@ import java.util.Set;
  * <p>
  * エラー行の行番号をロギングしたい場合は、対象のBeanに「lineNumber」プロパティを定義する。
  * このプロパティがない場合、行番号は "null" と出力される。
+ * 
+ * @author Nabu Rakutaro
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

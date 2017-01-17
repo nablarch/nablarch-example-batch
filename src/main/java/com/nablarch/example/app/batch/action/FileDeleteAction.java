@@ -29,12 +29,12 @@ public class FileDeleteAction extends BatchAction<File> {
     private static final String FILE_PATH_KEY = "RegistrationPdfFile.batch.work";
 
     @Override
-    public DataReader<File> createReader(ExecutionContext context) {
+    public DataReader<File> createReader(ExecutionContext ctx) {
         return new DeleteTargetFileReader(Paths.get(SystemRepository.getString(FILE_PATH_KEY)), "*pdf");
     }
 
     @Override
-    public Result handle(File inputData, ExecutionContext context) {
+    public Result handle(File inputData, ExecutionContext ctx) {
 
         String dateFileUpdateTime = DateUtil.formatDate(new Date(inputData.lastModified()), "yyyyMMdd");
         String yesterday = DateUtil.addDay(SystemTimeUtil.getDateString(), -1);

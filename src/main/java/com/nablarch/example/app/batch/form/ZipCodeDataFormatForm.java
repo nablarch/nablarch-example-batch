@@ -6,6 +6,8 @@ import nablarch.core.validation.ee.Required;
 
 /**
  * 住所情報のバリデーションに使用するフォームクラス。
+ * 
+ * @author Nabu Rakutaro
  */
 @Published
 public class ZipCodeDataFormatForm {

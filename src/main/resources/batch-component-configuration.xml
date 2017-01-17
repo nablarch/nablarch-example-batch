@@ -75,8 +75,6 @@
       <list>
         <!-- common/date.xml:業務日付コンポーネント -->
         <component-ref name="businessDateProvider" />
-        <!-- batch/handler/processStop.xml:処理停止ハンドラ -->
-        <component-ref name="processStopHandler" />
       </list>
     </property>
   </component>

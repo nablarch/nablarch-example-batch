@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import nablarch.core.util.annotation.Published;
 import nablarch.fw.DataReader;
@@ -19,7 +21,7 @@ import nablarch.fw.ExecutionContext;
 @Published
 public class DeleteTargetFileReader implements DataReader<File> {
     /** 参照結果ファイルのイテレータ */
-    private Iterator<Path> files = null;
+    private final Iterator<Path> files;
 
     /**
      * コンストラクタ。
@@ -30,12 +32,12 @@ public class DeleteTargetFileReader implements DataReader<File> {
      */
     @Published
     public DeleteTargetFileReader(final Path targetPath, String glob) {
-        DirectoryStream<Path> directoryStream;
-        try {
-            directoryStream = Files.newDirectoryStream(targetPath, glob);
-            files = directoryStream.iterator();
+        try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(targetPath, glob)){
+            final List<Path> paths = new ArrayList<>();
+            directoryStream.iterator().forEachRemaining(paths::add);
+            files = paths.iterator();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new IllegalArgumentException(e);
         }
     }
 
@@ -45,9 +47,10 @@ public class DeleteTargetFileReader implements DataReader<File> {
      * @param ctx 実行コンテキスト
      * @return ファイルデータを保持するオブジェクト
      */
+    @Override
     public synchronized File read(ExecutionContext ctx) {
         if (hasNext(ctx)) {
-            return this.files.next().toFile();
+            return files.next().toFile();
         }
         return null;
     }
@@ -58,8 +61,9 @@ public class DeleteTargetFileReader implements DataReader<File> {
      * @param ctx 実行コンテキスト
      * @return 次に読み込むファイルがまだ残っている場合はtrue。
      */
+    @Override
     public synchronized boolean hasNext(ExecutionContext ctx) {
-        return this.files.hasNext();
+        return files.hasNext();
     }
 
     /**
@@ -70,6 +74,6 @@ public class DeleteTargetFileReader implements DataReader<File> {
      */
     @Override
     public void close(ExecutionContext ctx) {
-        this.files = null;
+        // nop
     }
 }
