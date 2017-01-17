@@ -17,13 +17,14 @@ import nablarch.fw.action.BatchAction;
  * 住所ファイルをDBに登録するバッチクラス。
  * @author Nabu Rakutaro
  */
+@SuppressWarnings("WeakerAccess")
 @Published
 public class ImportZipCodeFileAction extends BatchAction<ZipCodeForm> {
 
     /**
-     * {@link com.nablarch.example.app.batch.reader.ZipCodeFileReader} から渡された一行分の情報をDBに登録する。
+     * {@link ZipCodeFileReader} から渡された一行分の情報をDBに登録する。
      * <p/>
-     * メソッド実行時に{@link com.nablarch.example.app.batch.interceptor.ValidateData} がインターセプトされるため、
+     * メソッド実行時に{@link ValidateData} がインターセプトされるため、
      * このメソッドには常にバリデーション済みの {@code inputData} が引き渡される。
      *
      * @param inputData 一行分の住所情報

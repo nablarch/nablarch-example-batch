@@ -84,7 +84,7 @@ public class ZipCodeFileReader implements DataReader<ZipCodeForm> {
             iterator = new ObjectMapperIterator<>(ObjectMapperFactory.create(ZipCodeForm.class,
                     new FileInputStream(zipCodeFile)));
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         }
     }
 

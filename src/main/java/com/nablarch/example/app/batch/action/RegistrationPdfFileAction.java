@@ -56,10 +56,28 @@ public class RegistrationPdfFileAction extends BatchAction<FileCreateRequest> {
         try {
             Thread.sleep(new Random().nextInt(20000)); // CHECKSTYLE IGNORE THIS LINE
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         }
 
         // ファイルデータ登録
+        FileData fileData = createFileData(inputData, fileName, workFile);
+        UniversalDao.insert(fileData);
+
+        // 登録済みのファイルを削除
+        FileUtil.deleteFile(workFile);
+
+        return new Success();
+    }
+
+    /**
+     * {@link FileData}を生成する。
+     *
+     * @param inputData 入力データ
+     * @param fileName ファイル名
+     * @param workFile 一時ファイル
+     * @return {@link FileData}
+     */
+    private FileData createFileData(final FileCreateRequest inputData, final String fileName, final File workFile) {
         Date sysDate = SystemTimeUtil.getDate();
         FileData fileData = new FileData();
         fileData.setFileDataId(inputData.getFileId());
@@ -67,12 +85,7 @@ public class RegistrationPdfFileAction extends BatchAction<FileCreateRequest> {
         fileData.setFileSize(workFile.length());
         fileData.setFileData(readFileToByte(workFile));
         fileData.setCreateTime(sysDate);
-        UniversalDao.insert(fileData);
-
-        // 登録済みのファイルを削除
-        FileUtil.deleteFile(workFile);
-
-        return new Success();
+        return fileData;
     }
 
     /**
@@ -115,7 +128,7 @@ public class RegistrationPdfFileAction extends BatchAction<FileCreateRequest> {
         try {
             return Files.readAllBytes(path);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         }
     }
 }

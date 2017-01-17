@@ -2,7 +2,8 @@ package com.nablarch.example.app.batch.form;
 
 import nablarch.common.databind.LineNumber;
 import nablarch.common.databind.csv.Csv;
-import nablarch.common.databind.csv.CsvDataBindConfig;
+import nablarch.common.databind.csv.Csv.CsvType;
+import nablarch.common.databind.csv.CsvDataBindConfig.QuoteMode;
 import nablarch.common.databind.csv.CsvFormat;
 import nablarch.core.util.annotation.Published;
 import nablarch.core.validation.ee.Domain;
@@ -16,10 +17,10 @@ import nablarch.core.validation.ee.Required;
 @Csv(properties = { "localGovernmentCode", "zipCode5digit", "zipCode7digit",
         "prefectureKana", "cityKana", "addressKana",
         "prefectureKanji", "cityKanji", "addressKanji",
-        "multipleZipCodes", "numberedEveryKoaza", "addressWithChome", "multipleAddress", "updateData", "updateDataReason" }, type = Csv.CsvType.CUSTOM)
+        "multipleZipCodes", "numberedEveryKoaza", "addressWithChome", "multipleAddress", "updateData", "updateDataReason" }, type = CsvType.CUSTOM)
 @CsvFormat(charset = "UTF-8", fieldSeparator = ',',
         ignoreEmptyLine = true, lineSeparator = "\r\n", quote = '"',
-        quoteMode = CsvDataBindConfig.QuoteMode.NORMAL, requiredHeader = false)
+        quoteMode = QuoteMode.NORMAL, requiredHeader = false)
 @Published
 public class ZipCodeForm {
 

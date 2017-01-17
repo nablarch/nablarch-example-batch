@@ -30,7 +30,7 @@ public class FileDeleteAction extends BatchAction<File> {
 
     @Override
     public DataReader<File> createReader(ExecutionContext ctx) {
-        return new DeleteTargetFileReader(Paths.get(SystemRepository.getString(FILE_PATH_KEY)), "*pdf");
+        return new DeleteTargetFileReader(Paths.get(SystemRepository.getString(FILE_PATH_KEY)));
     }
 
     @Override

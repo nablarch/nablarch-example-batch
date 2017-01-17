@@ -31,7 +31,7 @@ public class FileCreateRequestReader implements DataReader<FileCreateRequest> {
     private static final Logger LOGGER = LoggerManager.get(FileCreateRequestReader.class);
     
     /** 参照結果レコードのイテレータ */
-    private Iterator<FileCreateRequest> records = null;
+    private final Iterator<FileCreateRequest> records;
 
     /** ファイル生成リクエストのリスト */
     private final DeferredEntityList<FileCreateRequest> instance;
@@ -53,8 +53,8 @@ public class FileCreateRequestReader implements DataReader<FileCreateRequest> {
                             .findAllBySqlFile(FileCreateRequest.class, "GET_MISHORI_FILE_INFO",
                                     new Object[] {PROCESS_ID});
         // Iteratorとして保持
-        this.records = instance.iterator();
-        if (!this.records.hasNext()) {
+        records = instance.iterator();
+        if (!records.hasNext()) {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.logDebug("登録対象ファイルなし。");
             }
@@ -64,7 +64,7 @@ public class FileCreateRequestReader implements DataReader<FileCreateRequest> {
     /**
      * 未処理のデータをマーク(悲観ロック)し、他のプロセスで処理されないようにする。
      */
-    private void markUnprocessedData() {
+    private static void markUnprocessedData() {
         final SimpleDbTransactionManager myTran = SystemRepository.get("myTran");
         new SimpleDbTransactionExecutor<Void>(myTran) {
             @Override
@@ -80,12 +80,12 @@ public class FileCreateRequestReader implements DataReader<FileCreateRequest> {
 
     @Override
     public synchronized FileCreateRequest read(ExecutionContext ctx) {
-        return this.records.next();
+        return records.next();
     }
 
     @Override
     public synchronized boolean hasNext(ExecutionContext ctx) {
-        return this.records.hasNext();
+        return records.hasNext();
     }
 
     /**
@@ -99,6 +99,5 @@ public class FileCreateRequestReader implements DataReader<FileCreateRequest> {
         if (instance != null) {
             instance.close();
         }
-        this.records = null;
     }
 }

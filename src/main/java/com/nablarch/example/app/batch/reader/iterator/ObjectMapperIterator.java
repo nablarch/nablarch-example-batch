@@ -17,7 +17,7 @@ public class ObjectMapperIterator<E> implements Iterator<E> {
     /**
      * イテレート対象のマッパ
      */
-    private ObjectMapper<E> mapper = null;
+    private final ObjectMapper<E> mapper;
 
     /**
      * 返却するデータ
@@ -55,7 +55,7 @@ public class ObjectMapperIterator<E> implements Iterator<E> {
     @Override
     public E next() {
 
-        final E current = this.form;
+        final E current = form;
         form = mapper.read();
         return current;
     }

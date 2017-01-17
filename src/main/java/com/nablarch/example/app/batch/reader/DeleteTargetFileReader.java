@@ -27,12 +27,11 @@ public class DeleteTargetFileReader implements DataReader<File> {
      * コンストラクタ。
      *
      * @param targetPath 削除対象フォルダパス
-     * @param glob globパターン
      * @throws RuntimeException ファイルの読み込みに失敗した場合
      */
     @Published
-    public DeleteTargetFileReader(final Path targetPath, String glob) {
-        try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(targetPath, glob)){
+    public DeleteTargetFileReader(final Path targetPath) {
+        try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(targetPath, "*pdf")){
             final List<Path> paths = new ArrayList<>();
             directoryStream.iterator().forEachRemaining(paths::add);
             files = paths.iterator();

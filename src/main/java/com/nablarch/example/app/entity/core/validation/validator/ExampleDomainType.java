@@ -10,6 +10,7 @@ import nablarch.core.validation.ee.SystemChar;
  * 住所ファイルのBean Validationに使用する。
  * @author Nabu Rakutaro
  */
+@SuppressWarnings("all")
 @Published(tag = "architect")
 public class ExampleDomainType {
 
