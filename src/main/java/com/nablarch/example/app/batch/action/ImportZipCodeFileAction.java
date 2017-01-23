@@ -17,7 +17,6 @@ import nablarch.fw.action.BatchAction;
  * 住所ファイルをDBに登録するバッチクラス。
  * @author Nabu Rakutaro
  */
-@SuppressWarnings("WeakerAccess")
 @Published
 public class ImportZipCodeFileAction extends BatchAction<ZipCodeForm> {
 

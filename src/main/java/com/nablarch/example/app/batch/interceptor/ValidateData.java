@@ -36,7 +36,7 @@ import java.util.Set;
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-@Interceptor(ValidateData.ValidateDateImpl.class)
+@Interceptor(ValidateData.ValidateDataImpl.class)
 @Published
 public @interface ValidateData {
 
@@ -44,7 +44,7 @@ public @interface ValidateData {
      * {@link ValidateData}インターセプタの実装。
      */
     @SuppressWarnings("PublicInnerClass")
-    class ValidateDateImpl extends Interceptor.Impl<Object, Result, ValidateData> {
+    class ValidateDataImpl extends Interceptor.Impl<Object, Result, ValidateData> {
 
         /** ロガー */
         private static final Logger LOGGER = LoggerManager.get(ValidateData.class);

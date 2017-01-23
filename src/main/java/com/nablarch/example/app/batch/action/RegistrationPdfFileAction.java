@@ -1,13 +1,8 @@
 package com.nablarch.example.app.batch.action;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Date;
-import java.util.Random;
-
+import com.nablarch.example.app.batch.reader.FileCreateRequestReader;
+import com.nablarch.example.app.entity.FileCreateRequest;
+import com.nablarch.example.app.entity.FileData;
 import nablarch.common.dao.UniversalDao;
 import nablarch.core.beans.BeanUtil;
 import nablarch.core.date.SystemTimeUtil;
@@ -20,9 +15,14 @@ import nablarch.fw.Result;
 import nablarch.fw.Result.Success;
 import nablarch.fw.action.BatchAction;
 
-import com.nablarch.example.app.batch.reader.FileCreateRequestReader;
-import com.nablarch.example.app.entity.FileCreateRequest;
-import com.nablarch.example.app.entity.FileData;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Date;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /**
  * PDFファイル登録クラス。
@@ -54,7 +54,7 @@ public class RegistrationPdfFileAction extends BatchAction<FileCreateRequest> {
 
         // 処理が単純で、応答時間が非常に短いので実務処理に近づけるためSleepさせる
         try {
-            Thread.sleep(new Random().nextInt(20000)); // CHECKSTYLE IGNORE THIS LINE
+            TimeUnit.MILLISECONDS.sleep(new Random().nextInt(20000));
         } catch (InterruptedException e) {
             throw new IllegalStateException(e);
         }
