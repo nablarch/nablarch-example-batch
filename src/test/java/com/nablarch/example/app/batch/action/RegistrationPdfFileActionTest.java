@@ -11,8 +11,11 @@ import java.util.List;
 
 import com.nablarch.example.app.entity.FileCreateRequest;
 import com.nablarch.example.app.entity.FileData;
+
 import nablarch.common.dao.UniversalDao;
 import nablarch.core.date.SystemTimeUtil;
+import nablarch.core.db.connection.AppDbConnection;
+import nablarch.core.db.connection.DbConnectionContext;
 import nablarch.core.repository.SystemRepository;
 import nablarch.core.repository.di.DiContainer;
 import nablarch.core.repository.di.config.xml.XmlComponentDefinitionLoader;
@@ -53,6 +56,10 @@ public class RegistrationPdfFileActionTest {
         // FileCreateRequest初期化
         Date sysDate = SystemTimeUtil.getDate();
         FileCreateRequest insertFIle = new FileCreateRequest();
+
+        final AppDbConnection connection = DbConnectionContext.getConnection();
+        connection.prepareStatement("delete from FILE_CREATE_REQUEST")
+                  .execute();
         for (int i = 0; i < TEST_DATA_ID.length; i++) {
             insertFIle.setFileId(TEST_DATA_ID[i]);
             UniversalDao.delete(insertFIle);

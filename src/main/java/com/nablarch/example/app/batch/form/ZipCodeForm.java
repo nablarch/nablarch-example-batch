@@ -20,7 +20,7 @@ import nablarch.core.validation.ee.Required;
         "multipleZipCodes", "numberedEveryKoaza", "addressWithChome", "multipleAddress", "updateData", "updateDataReason" }, type = CsvType.CUSTOM)
 @CsvFormat(charset = "UTF-8", fieldSeparator = ',',
         ignoreEmptyLine = true, lineSeparator = "\r\n", quote = '"',
-        quoteMode = QuoteMode.NORMAL, requiredHeader = false, nullToEmpty = true)
+        quoteMode = QuoteMode.NORMAL, requiredHeader = false, emptyToNull = true)
 @Published
 public class ZipCodeForm {
 
