@@ -150,7 +150,7 @@ Gitを使用しない場合、最新のタグからzipをダウンロードし�
 
     $mvn clean package
     
-アーカイブの生成に成功すると、以下のようなログがコンソールに出力され、targetディレクトリに"nablarch-example-app-batch-<バージョン>-dist.zip"が出力されます。
+アーカイブの生成に成功すると、以下のようなログがコンソールに出力され、targetディレクトリに"nablarch-example-batch-<バージョン>-dist.zip"が出力されます。
 
     [INFO] --- maven-assembly-plugin:2.5.1:single (default) @ nablarch-example-batch ---
     [INFO] Reading assembly descriptor: src/main/assembly/assemble.xml
@@ -159,10 +159,10 @@ Gitを使用しない場合、最新のタグからzipをダウンロードし�
     [INFO] BUILD SUCCESS
     [INFO] ------------------------------------------------------------------------
     
-次に、出力されたnablarch-example-app-batch-<バージョン>-dist.zipを任意のディレクトリに展開してください。
+次に、出力されたnablarch-example-batch-<バージョン>-dist.zipを任意のディレクトリに展開してください。
 
 最後に、バッチもしくはシェルファイルからアプリケーションを起動します。run-batch.bat、run-batch.sh共に第一引数にrequestPathの値、第二引数にdiConfigの値を入力して起動します。
-以下、それぞれのコマンド例です。<展開先ディレクトリ>/nablarch-example-app-batch-<バージョン>-dist/nablarch-example-app-batch-<バージョン>に移動後、実行してください。
+以下、それぞれのコマンド例です。<展開先ディレクトリ>/nablarch-example-batch-<バージョン>-dist/nablarch-example-batch-<バージョン>に移動後、実行してください。
 
 バッチファイル
 
