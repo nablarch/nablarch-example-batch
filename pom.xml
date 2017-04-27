@@ -285,11 +285,15 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
         <configuration>
-          <classifier>${env.classifier}</classifier>
           <archive>
             <manifestEntries>
               <Target-Environment>${env.name}</Target-Environment>
             </manifestEntries>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>lib/</classpathPrefix>
+              <mainClass>nablarch.fw.launcher.Main</mainClass>
+            </manifest>
           </archive>
         </configuration>
       </plugin>
@@ -326,14 +330,7 @@
         </configuration>
       </plugin>
       <!-- ================ここまで任意で使用するツールの設定================ -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <version>2.9</version>
-        <configuration>
-          <includeScope>runtime</includeScope>
-        </configuration>
-      </plugin>
+      
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -345,8 +342,10 @@
             </goals>
             <configuration>
               <descriptors>
-                <descriptor>src/main/assembly/assemble.xml</descriptor>
+                <descriptor>distribution.xml</descriptor>
               </descriptors>
+              <finalName>application-${project.version}</finalName>
+              <appendAssemblyId>false</appendAssemblyId>
             </configuration>
           </execution>
         </executions>
