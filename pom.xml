@@ -185,22 +185,10 @@
     </profile>
     <profile>
       <id>travis</id>
-      <repositories>
-        <repository>
-          <id>travis</id>
-          <url>${develop_repo_url}</url>
-        </repository>
-      </repositories>
-      <pluginRepositories>
-        <pluginRepository>
-          <id>travis</id>
-          <url>${develop_repo_url}</url>
-        </pluginRepository>
-      </pluginRepositories>
       <distributionManagement>
         <site>
           <id>travis</id>
-          <url>dav:${develop_test_report_url}</url>
+          <url>${develop_test_report_url}</url>
         </site>
       </distributionManagement>
     </profile>
