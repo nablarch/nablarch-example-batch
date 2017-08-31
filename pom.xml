@@ -183,6 +183,27 @@
         </plugins>
       </build>
     </profile>
+    <profile>
+      <id>travis</id>
+      <repositories>
+        <repository>
+          <id>travis</id>
+          <url>${develop_repo_url}</url>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>travis</id>
+          <url>${develop_repo_url}</url>
+        </pluginRepository>
+      </pluginRepositories>
+      <distributionManagement>
+        <site>
+          <id>travis</id>
+          <url>dav:${develop_test_report_url}</url>
+        </site>
+      </distributionManagement>
+    </profile>
   </profiles>
 
   <dependencyManagement>
@@ -351,5 +372,33 @@
         </executions>
       </plugin>
     </plugins>
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-webdav-jackrabbit</artifactId>
+        <version>3.0.0</version>
+      </extension>
+    </extensions>
   </build>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <additionalparam>-Xdoclint:none</additionalparam>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </reporting>
+
 </project>

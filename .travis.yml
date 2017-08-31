@@ -13,7 +13,7 @@ script:
 - git clone -b master https://github.com/nablarch/nablarch-ci-script.git $HOME/build-script/
   && chmod +x $HOME/build-script/travis-ci/*.sh
 - $HOME/build-script/travis-ci/install-mvn-3.2.5.sh
-- mvn -P gsp generate-resources
+- $HOME/build-script/travis-ci/gsp-gen.sh
 - $HOME/build-script/travis-ci/nablarch-mvn-build-nodeploy.sh
 - $HOME/build-script/travis-ci/upload-mvn-test-report.sh
 notifications:
