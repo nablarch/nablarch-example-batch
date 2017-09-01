@@ -1,5 +1,11 @@
 nablarch-example-batch
 ===========================
+
+| master | develop |
+|:-----------|:------------|
+|[![Build Status](https://travis-ci.org/nablarch/nablarch-example-batch.svg?branch=master)](https://travis-ci.org/nablarch/nablarch-example-batch)|[![Build Status](https://travis-ci.org/nablarch/nablarch-example-batch.svg?branch=develop)](https://travis-ci.org/nablarch/nablarch-example-batch)|
+
+
 Nablarchアプリケーションフレームワークを利用して作成したNablarchバッチExampleアプリケーションです。
 
 ## 実行手順
@@ -113,3 +119,5 @@ Gitを使用しない場合、最新のタグからzipをダウンロードし�
   JDBC URL：jdbc:h2:{dbファイルのパス}/nablarch_example  
   ユーザ名：NABLARCH_EXAMPLE  
   パスワード：NABLARCH_EXAMPLE
+
+
