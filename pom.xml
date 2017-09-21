@@ -6,12 +6,12 @@
   <parent>
     <groupId>com.nablarch.archetype</groupId>
     <artifactId>nablarch-archetype-parent</artifactId>
-    <version>5u10</version>
+    <version>5u11</version>
   </parent>
 
   <groupId>com.nablarch.example</groupId>
   <artifactId>nablarch-example-batch</artifactId>
-  <version>5u10</version>
+  <version>5u11</version>
   <packaging>jar</packaging>
 
   <properties>
@@ -199,7 +199,7 @@
       <dependency>
         <groupId>com.nablarch.profile</groupId>
         <artifactId>nablarch-bom</artifactId>
-        <version>5u10</version>
+        <version>5u11</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
