@@ -114,15 +114,6 @@
           <plugin>
             <groupId>jp.co.tis.gsp</groupId>
             <artifactId>gsp-dba-maven-plugin</artifactId>
-            <dependencies>
-              <!-- プロジェクトで使用するDB製品にあわせたJDBCドライバに上書きする -->
-              <dependency>
-                <groupId>com.h2database</groupId>
-                <artifactId>h2</artifactId>
-                <version>1.4.192</version>
-                <scope>runtime</scope>
-              </dependency>
-            </dependencies>
             <executions>
               <execution>
                 <id>default-cli</id>
@@ -311,6 +302,14 @@
       <plugin>
         <groupId>jp.co.tis.gsp</groupId>
         <artifactId>gsp-dba-maven-plugin</artifactId>
+        <dependencies>
+          <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.192</version>
+            <scope>runtime</scope>
+          </dependency>
+        </dependencies>
       </plugin>
       <!-- gsp-dba-maven-pluginで自動生成したソースをビルド時に使用するための設定 -->
       <plugin>
