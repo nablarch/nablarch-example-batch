@@ -148,3 +148,5 @@ crashlytics-build.properties
 fabric.properties
 
 *.log
+
+work/registration/tmp/*.pdf

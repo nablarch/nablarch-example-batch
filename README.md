@@ -76,6 +76,8 @@ Gitを使用しない場合、最新のタグからzipをダウンロードし�
 プロジェクトリポジトリで実行したいバッチのコマンドを実行してください。
 
   PDFファイル削除バッチ
+  
+    バッチ実行前に `work/test/registration/test/test1.pdf` を `work/registration/tmp` にコピーしてください。
 
     $mvn exec:java -Dexec.mainClass=nablarch.fw.launcher.Main -Dexec.args="'-requestPath' 'FileDeleteAction/FileDelete' '-diConfig' 'classpath:file-delete.xml' '-userId' '105'"
 
