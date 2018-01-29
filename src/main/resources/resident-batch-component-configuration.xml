@@ -9,8 +9,8 @@
   <import file="nablarch/schema-config.xml" />
 
   <!-- 環境設定ファイル -->
-  <config-file file="common.config" />
-  <config-file file="env.config" />
+  <config-file file="common.properties" />
+  <config-file file="env.properties" />
 
   <!--
   バッチ固有の設定読み込み

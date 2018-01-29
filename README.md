@@ -33,15 +33,11 @@ Gitを使用しない場合、最新のタグからzipをダウンロードし�
 まず、データベースのセットアップ及びエンティティクラスの作成を行います。以下のコマンドを実行してください。
 
     $cd nablarch-example-batch
-    $mvn -P gsp generate-resources
+    $mvn generate-resources
     
-実行に成功すると、以下のようなログがコンソールに出力され、nablarch-example-batchディレクトリの下にgsp-targetディレクトリが作成されます。
+実行に成功すると、以下のようなログがコンソールに出力され、nablarch-example-batchディレクトリの下にtargetディレクトリが作成されます。
 
     (中略)
-    [INFO] --- gsp-dba-maven-plugin:3.2.0:export-schema (default-cli) @ nablarch-example-batch ---
-    [INFO] PUBLICスキーマのExportを開始します。:c:\example\nablarch-example-batch\gsp-target\output\PUBLIC.dmp
-    [INFO] Building jar: c:\example\nablarch-example-batch\gsp-target\output\nablarch-example-batch-testdata-0.0.1-SNAPSHOT.jar
-    [INFO] PUBLICスキーマのExport完了
     [INFO] ------------------------------------------------------------------------
     [INFO] BUILD SUCCESS
     [INFO] ------------------------------------------------------------------------
@@ -51,14 +47,11 @@ Gitを使用しない場合、最新のタグからzipをダウンロードし�
 
 次に、アプリケーションをビルドします。以下のコマンドを実行してください。
 
-    $mvn clean package
+    $mvn package
     
 実行に成功すると、以下のようなログがコンソールに出力されます。
 
     (中略)
-    [INFO] --- maven-assembly-plugin:2.5.1:single (default) @ nablarch-example-batch ---
-    [INFO] Reading assembly descriptor: src/main/assembly/assemble.xml
-    [INFO] Building zip: c:\example\nablarch-example-batch\target\nablarch-example-batch-0.0.1-SNAPSHOT-dist.zip
     [INFO] ------------------------------------------------------------------------
     [INFO] BUILD SUCCESS
     [INFO] ------------------------------------------------------------------------
@@ -83,6 +76,8 @@ Gitを使用しない場合、最新のタグからzipをダウンロードし�
 プロジェクトリポジトリで実行したいバッチのコマンドを実行してください。
 
   PDFファイル削除バッチ
+  
+    バッチ実行前に `work/test/registration/test/test1.pdf` を `work/registration/tmp` にコピーしてください。
 
     $mvn exec:java -Dexec.mainClass=nablarch.fw.launcher.Main -Dexec.args="'-requestPath' 'FileDeleteAction/FileDelete' '-diConfig' 'classpath:file-delete.xml' '-userId' '105'"
 
