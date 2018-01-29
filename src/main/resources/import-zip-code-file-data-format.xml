@@ -9,6 +9,6 @@
   <import file="batch-component-configuration.xml"/>
 
   <!-- バッチ個別設定の読み込み -->
-  <config-file file="batch-config/import-zip-code-file.config" />
+  <config-file file="batch-config/import-zip-code-file.properties" />
 
 </component-configuration>

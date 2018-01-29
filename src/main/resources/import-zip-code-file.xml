@@ -9,7 +9,7 @@
   <import file="batch-component-configuration.xml"/>
 
   <!-- バッチ個別設定の読み込み -->
-  <config-file file="batch-config/import-zip-code-file.config" />
+  <config-file file="batch-config/import-zip-code-file.properties" />
 
   <!-- ファイルパス管理の設定 -->
   <component name="filePathSetting" class="nablarch.core.util.FilePathSetting">

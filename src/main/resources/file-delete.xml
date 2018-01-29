@@ -8,6 +8,6 @@
   <!-- 環境設定ファイル -->
   <import file="batch-component-configuration.xml"/>
 
-  <config-file file="batch-config/file-delete.config" />
+  <config-file file="batch-config/file-delete.properties" />
 
 </component-configuration>
