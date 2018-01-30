@@ -4,7 +4,7 @@
 
   <groupId>com.nablarch.example</groupId>
   <artifactId>nablarch-example-batch</artifactId>
-  <version>5u13</version>
+  <version>5u13-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <properties>
