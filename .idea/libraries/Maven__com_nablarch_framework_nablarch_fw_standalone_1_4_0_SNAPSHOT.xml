@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.nablarch.framework:nablarch-fw-standalone:1.4.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/nablarch/framework/nablarch-fw-standalone/1.4.0-SNAPSHOT/nablarch-fw-standalone-1.4.0-20190226.074153-9.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/nablarch/framework/nablarch-fw-standalone/1.4.0-SNAPSHOT/nablarch-fw-standalone-1.4.0-20190226.074153-9-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/nablarch/framework/nablarch-fw-standalone/1.4.0-SNAPSHOT/nablarch-fw-standalone-1.4.0-20190226.074153-9-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
