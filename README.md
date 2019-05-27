@@ -79,7 +79,7 @@ Gitを使用しない場合、最新のタグからzipをダウンロードし�
 
     バッチ実行前に `work/test/registration/test/test1.pdf` を `work/registration/tmp` にコピーしてください。
 
-    `test1.pdf` の更新日を、アプリ実行日の前日以前に変更しないとファイルが削除されません。
+    `test1.pdf` の更新日を、アプリ実行日の前日以前に変更してください。
 
       $mvn exec:java -Dexec.mainClass=nablarch.fw.launcher.Main -Dexec.args="'-requestPath' 'FileDeleteAction/FileDelete' '-diConfig' 'classpath:file-delete.xml' '-userId' '105'"
 
@@ -87,7 +87,7 @@ Gitを使用しない場合、最新のタグからzipをダウンロードし�
 
     バッチ実行前に下記処理を行ってください：
 
-    `mvn gsp-dba:execute-ddl` 及び `mvn gsp-dba:load-data` を実行してDBのデータを初期化する。
+    `mvn gsp-dba:execute-ddl` 及び `mvn gsp-dba:load-data` を実行してDBのデータを初期化してください。
 
     `work/test/registration/test/test1.pdf` を `work/registration/input` にコピーしてください。
 
