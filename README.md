@@ -79,10 +79,9 @@ Gitを使用しない場合、最新のタグからzipをダウンロードし�
 
     バッチ実行前に `work/test/registration/test/test1.pdf` を `work/registration/tmp` にコピーしてください。
 
-    `test1.pdf` ファイルプロパティの更新日時(lastModified)を、nablarch システム日付の前日以前に変更してください。
+    `test1.pdf` ファイルの更新日時(lastModified)が、nablarch システム日付の前日より前であることを確認してください。
 
-     例：nablarch システム日付 = 2019/05/29、`test1.pdf` ファイルプロパティの更新日時 (lastModified) は「2019/05/27」まで作業対象となり、
-    「2019/05/28」の場合作業対象外。
+     例：nablarch システム日付が`2019/05/29`の場合、ファイルの更新日時が`2019/05/27`までのものが削除対象となり、`2019/05/28`の場合は削除対象外となります。
 
       $mvn exec:java -Dexec.mainClass=nablarch.fw.launcher.Main -Dexec.args="'-requestPath' 'FileDeleteAction/FileDelete' '-diConfig' 'classpath:file-delete.xml' '-userId' '105'"
 
