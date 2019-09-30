@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.nablarch.framework:nablarch-core-validation:1.2.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/nablarch/framework/nablarch-core-validation/1.2.0-SNAPSHOT/nablarch-core-validation-1.2.0-20190226.071625-11.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/nablarch/framework/nablarch-core-validation/1.2.0-SNAPSHOT/nablarch-core-validation-1.2.0-20190226.071625-11-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/nablarch/framework/nablarch-core-validation/1.2.0-SNAPSHOT/nablarch-core-validation-1.2.0-20190226.071625-11-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

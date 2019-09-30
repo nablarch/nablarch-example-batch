@@ -75,32 +75,40 @@ Gitを使用しない場合、最新のタグからzipをダウンロードし�
 #### 4.1 実行コマンド例
 プロジェクトリポジトリで実行したいバッチのコマンドを実行してください。
 
-  PDFファイル削除バッチ
-  
+* PDFファイル削除バッチ
+
     バッチ実行前に `work/test/registration/test/test1.pdf` を `work/registration/tmp` にコピーしてください。
 
-    $mvn exec:java -Dexec.mainClass=nablarch.fw.launcher.Main -Dexec.args="'-requestPath' 'FileDeleteAction/FileDelete' '-diConfig' 'classpath:file-delete.xml' '-userId' '105'"
+    `test1.pdf` ファイルの更新日時(lastModified)が、nablarch システム日付の前日より前であることを確認してください。
 
-  PDF読み込みバッチ
+     例：nablarch システム日付が`2019/05/29`の場合、ファイルの更新日時が`2019/05/27`までのものが削除対象となり、`2019/05/28`の場合は削除対象外となります。
 
-    $mvn exec:java -Dexec.mainClass=nablarch.fw.launcher.Main -Dexec.args="'-requestPath' 'RegistrationPdfFileAction/RegistrationPdfFile' '-diConfig' 'classpath:registration-pdf-file.xml' '-userId' '105'"
+      $mvn exec:java -Dexec.mainClass=nablarch.fw.launcher.Main -Dexec.args="'-requestPath' 'FileDeleteAction/FileDelete' '-diConfig' 'classpath:file-delete.xml' '-userId' '105'"
 
-  データバインドを使用した住所登録バッチ
+* PDF読み込みバッチ
 
-    $mvn exec:java -Dexec.mainClass=nablarch.fw.launcher.Main -Dexec.args="'-requestPath' 'ImportZipCodeFileAction/ImportZipCodeFile' '-diConfig' 'classpath:import-zip-code-file.xml' '-userId' '105'"
+    バッチ実行前に下記処理を行ってください：
 
-  汎用データフォーマットを使用した住所登録バッチ
+    `mvn gsp-dba:execute-ddl` 及び `mvn gsp-dba:load-data` を実行してDBのデータを初期化してください。
 
-    $mvn exec:java -Dexec.mainClass=nablarch.fw.launcher.Main -Dexec.args="'-requestPath' 'ImportZipCodeFileDataFormatAction/ImportZipCodeFile' '-diConfig' 'classpath:import-zip-code-file-data-format.xml' '-userId' '105'"
+    `work/test/registration/test/test1.pdf` を `work/registration/input` にコピーしてください。
+
+      $mvn exec:java -Dexec.mainClass=nablarch.fw.launcher.Main -Dexec.args="'-requestPath' 'RegistrationPdfFileAction/RegistrationPdfFile' '-diConfig' 'classpath:registration-pdf-file.xml' '-userId' '105'"
+
+* データバインドを使用した住所登録バッチ
+
+      $mvn exec:java -Dexec.mainClass=nablarch.fw.launcher.Main -Dexec.args="'-requestPath' 'ImportZipCodeFileAction/ImportZipCodeFile' '-diConfig' 'classpath:import-zip-code-file.xml' '-userId' '105'"
+
+* 汎用データフォーマットを使用した住所登録バッチ
+
+      $mvn exec:java -Dexec.mainClass=nablarch.fw.launcher.Main -Dexec.args="'-requestPath' 'ImportZipCodeFileDataFormatAction/ImportZipCodeFile' '-diConfig' 'classpath:import-zip-code-file-data-format.xml' '-userId' '105'"
     
-なお、 `maven-assembly-plugin` を使用して実行可能jarの生成を行っているため、以下の手順にて実行することもできる。
+なお、 `maven-assembly-plugin` を使用して実行可能 jar の生成を行っているため、以下の手順にて実行することもできる。
 
 1. ``target/application-<version_no>.zip`` を任意のディレクトリに解凍する。
 2. 以下のコマンドにて実行する
 
-  ```
-      java -jar <1で解凍したディレクトリ名>/nablarch-example-batch-<version_no>.jar <起動に必要な引数(mvn exec:javaの例を参照)>
-  ```
+       $java -jar <1で解凍したディレクトリ名>/nablarch-example-batch-<version_no>.jar <起動に必要な引数(mvn exec:javaの例を参照)>
 
 ### 5. DBの確認方法
 
