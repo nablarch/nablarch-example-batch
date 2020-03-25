@@ -33,6 +33,8 @@
   <import file="nablarch/batch/loop-transaction.xml" />
   <!-- データリード機能 -->
   <import file="nablarch/batch/batch-data-read.xml" />
+  <!-- スレッドコンテキスト機能 -->
+  <import file="nablarch/batch/threadcontext-for-batch.xml" />
 
   <!-- ハンドラキュー構成 -->
   <list name="handlerQueue">
@@ -42,6 +44,12 @@
 
     <!-- グローバルエラーハンドラ -->
     <component class="nablarch.fw.handler.GlobalErrorHandler" />
+
+    <!-- スレッドコンテキスト変数削除ハンドラ -->
+    <component class="nablarch.common.handler.threadcontext.ThreadContextClearHandler" />
+
+    <!-- スレッドコンテキスト設定ハンドラ -->
+    <component-ref name="threadContextHandler" />
 
     <!-- データベース接続ハンドラ(初期処理/終了処理用) -->
     <component-ref name="dbConnectionManagementHandler" />
