@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: com.nablarch.framework:nablarch-fw-standalone:1.4.0-SNAPSHOT">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/nablarch/framework/nablarch-fw-standalone/1.4.0-SNAPSHOT/nablarch-fw-standalone-1.4.0-20190226.074153-9.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/nablarch/framework/nablarch-fw-standalone/1.4.0-SNAPSHOT/nablarch-fw-standalone-1.4.0-20200608.083009-2.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/com/nablarch/framework/nablarch-fw-standalone/1.4.0-SNAPSHOT/nablarch-fw-standalone-1.4.0-20190226.074153-9-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/nablarch/framework/nablarch-fw-standalone/1.4.0-SNAPSHOT/nablarch-fw-standalone-1.4.0-20200608.083009-2-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/nablarch/framework/nablarch-fw-standalone/1.4.0-SNAPSHOT/nablarch-fw-standalone-1.4.0-20190226.074153-9-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/nablarch/framework/nablarch-fw-standalone/1.4.0-SNAPSHOT/nablarch-fw-standalone-1.4.0-20200608.083009-2-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
