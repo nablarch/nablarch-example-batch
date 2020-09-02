@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: com.nablarch.framework:nablarch-fw-web:1.8.0-SNAPSHOT">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/nablarch/framework/nablarch-fw-web/1.8.0-SNAPSHOT/nablarch-fw-web-1.8.0-20200828.022143-9.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/nablarch/framework/nablarch-fw-web/1.8.0-SNAPSHOT/nablarch-fw-web-1.8.0-20200902.012920-10.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/com/nablarch/framework/nablarch-fw-web/1.8.0-SNAPSHOT/nablarch-fw-web-1.8.0-20200828.022143-9-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/nablarch/framework/nablarch-fw-web/1.8.0-SNAPSHOT/nablarch-fw-web-1.8.0-20200902.012920-10-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/nablarch/framework/nablarch-fw-web/1.8.0-SNAPSHOT/nablarch-fw-web-1.8.0-20200828.022143-9-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/nablarch/framework/nablarch-fw-web/1.8.0-SNAPSHOT/nablarch-fw-web-1.8.0-20200902.012920-10-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
