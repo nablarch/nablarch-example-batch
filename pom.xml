@@ -133,7 +133,7 @@
       <plugin>
         <groupId>jp.co.tis.gsp</groupId>
         <artifactId>gsp-dba-maven-plugin</artifactId>
-        <version>4.4.0</version>
+        <version>4.4.1</version>
         <configuration>
           <erdFile>src/main/resources/entity/data-model.edm</erdFile>
           
