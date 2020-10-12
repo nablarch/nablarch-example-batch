@@ -1,11 +1,6 @@
 nablarch-example-batch
 ===========================
 
-| master | develop |
-|:-----------|:------------|
-|[![Build Status](https://travis-ci.org/nablarch/nablarch-example-batch.svg?branch=master)](https://travis-ci.org/nablarch/nablarch-example-batch)|[![Build Status](https://travis-ci.org/nablarch/nablarch-example-batch.svg?branch=develop)](https://travis-ci.org/nablarch/nablarch-example-batch)|
-
-
 Nablarchアプリケーションフレームワークを利用して作成したNablarchバッチExampleアプリケーションです。
 
 ## 実行手順
