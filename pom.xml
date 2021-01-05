@@ -47,6 +47,18 @@
 
   <dependencies>
 
+    <!-- Micrometerアダプタ -->
+    <dependency>
+      <groupId>com.nablarch.integration</groupId>
+      <artifactId>nablarch-micrometer-adaptor</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-registry-cloudwatch2</artifactId>
+      <version>1.5.4</version>
+    </dependency>
+
     <dependency>
       <groupId>com.nablarch.profile</groupId>
       <artifactId>nablarch-batch</artifactId>
@@ -82,6 +94,12 @@
       <groupId>com.nablarch.integration</groupId>
       <artifactId>slf4j-nablarch-adaptor</artifactId>
       <scope>runtime</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.30</version>
     </dependency>
 
     <dependency>
@@ -243,7 +261,7 @@
               <descriptors>
                 <descriptor>distribution.xml</descriptor>
               </descriptors>
-              <finalName>application-${project.version}-old</finalName>
+              <finalName>application-${project.version}-new</finalName>
               <appendAssemblyId>false</appendAssemblyId>
             </configuration>
           </execution>

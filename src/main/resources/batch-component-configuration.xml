@@ -86,4 +86,47 @@
       </list>
     </property>
   </component>
+
+  <!-- Micrometer -->
+  <component name="meterBinderListProvider"
+             class="nablarch.integration.micrometer.DefaultMeterBinderListProvider" />
+
+  <component name="disposer"
+             class="nablarch.core.repository.disposal.BasicApplicationDisposer">
+
+    <property name="disposableList">
+      <list>
+        <component-ref name="meterBinderListProvider"/>
+      </list>
+    </property>
+
+  </component>
+
+  <component name="meterRegistry" class="nablarch.integration.micrometer.cloudwatch.CloudWatchMeterRegistryFactory">
+    <property name="meterBinderListProvider" ref="meterBinderListProvider" />
+    <property name="applicationDisposer" ref="disposer" />
+  </component>
+
+  <!-- CommitLogger を複数組み合わせる -->
+  <component name="commitLogger"
+             class="nablarch.core.log.app.CompositeCommitLogger">
+    <property name="commitLoggerList">
+      <list>
+        <!-- デフォルトの CommitLogger を設定 -->
+        <component class="nablarch.core.log.app.BasicCommitLogger">
+          <property name="interval" value="${nablarch.commitLogger.interval}" />
+        </component>
+
+        <!-- [Micrometer]トランザクション単位の処理時間の計測 -->
+        <component class="nablarch.integration.micrometer.instrument.batch.BatchTransactionTimeMetricsLogger">
+          <property name="meterRegistry" ref="meterRegistry" />
+        </component>
+
+        <!-- [Micrometer]処理件数を計測する -->
+        <component class="nablarch.integration.micrometer.instrument.batch.BatchProcessedRecordCountMetricsLogger">
+          <property name="meterRegistry" ref="meterRegistry" />
+        </component>
+      </list>
+    </property>
+  </component>
 </component-configuration>
