@@ -118,4 +118,20 @@ Gitを使用しない場合、最新のタグからzipをダウンロードし�
   ユーザ名：NABLARCH_EXAMPLE  
   パスワード：NABLARCH_EXAMPLE
 
+### 6. 性能検証
 
+性能検証は、 `ImportZipCodeFileAction` を利用する。  
+デフォルトでリポジトリに配置されているテストデータでは件数が少ないため、代わりに全国全てのデータを含んだCSVファイル(2021年1月現在で、124,522件)を
+郵便局のサイトから入手する。
+
+- [都道府県一覧 | 郵便局](https://www.post.japanpost.jp/zipcode/dl/kogaki-zip.html)
+
+上記郵便局のホームページから「全国一括」のCSVファイルをダウンロードし、 `work/input/` の下に配置する。  
+このとき、 CSV ファイルに以下の修正を行う。
+
+- `importZipCode_all.csv` という名前にリネームする
+- ファイルの文字コードを UTF-8 に変換する
+
+さらに、バッチ実行前に環境変数 `CSV_FILE_NAME` に `importZipCode_all` と設定する。  
+これにより、読み込まれるファイルが `importZipCode_all.csv` に切り替わる。  
+（`importZipCode_all.csv` は Git 管理の除外対象に設定しているので、誤ってコミットするのを防げる）
