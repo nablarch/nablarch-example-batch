@@ -33,7 +33,7 @@ public class ZipCodeFileReader implements DataReader<ZipCodeForm> {
      * @return 一行分のデータ
      */
     @Override
-    public ZipCodeForm read(ExecutionContext ctx) {
+    public synchronized ZipCodeForm read(ExecutionContext ctx) {
         if (iterator == null) {
             initialize();
         }
@@ -47,7 +47,7 @@ public class ZipCodeFileReader implements DataReader<ZipCodeForm> {
      * @return 次行がある場合は {@code true} 、ない場合は {@code false}
      */
     @Override
-    public boolean hasNext(ExecutionContext ctx) {
+    public synchronized boolean hasNext(ExecutionContext ctx) {
         if (iterator == null) {
             initialize();
         }
@@ -61,7 +61,7 @@ public class ZipCodeFileReader implements DataReader<ZipCodeForm> {
      * @param ctx 実行コンテキスト
      */
     @Override
-    public void close(ExecutionContext ctx) {
+    public synchronized void close(ExecutionContext ctx) {
         iterator.close();
     }
 
