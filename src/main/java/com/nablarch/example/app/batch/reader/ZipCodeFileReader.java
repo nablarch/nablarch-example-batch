@@ -3,6 +3,7 @@ package com.nablarch.example.app.batch.reader;
 import com.nablarch.example.app.batch.form.ZipCodeForm;
 import com.nablarch.example.app.batch.reader.iterator.ObjectMapperIterator;
 import nablarch.common.databind.ObjectMapperFactory;
+import nablarch.core.repository.SystemRepository;
 import nablarch.core.util.FilePathSetting;
 import nablarch.core.util.annotation.Published;
 import nablarch.fw.DataReader;
@@ -19,11 +20,6 @@ import java.io.FileNotFoundException;
  */
 @Published
 public class ZipCodeFileReader implements DataReader<ZipCodeForm> {
-
-    /**
-     * 読み込むファイルの名称
-     */
-    private static final String FILE_NAME = "importZipCode";
 
     /**
      * 処理対象のデータを返すイテレータ
@@ -77,7 +73,8 @@ public class ZipCodeFileReader implements DataReader<ZipCodeForm> {
      */
     private void initialize() {
         FilePathSetting filePathSetting = FilePathSetting.getInstance();
-        File zipCodeFile = filePathSetting.getFileWithoutCreate("csv-input", FILE_NAME);
+        String fileName = SystemRepository.get("csv-file-name");
+        File zipCodeFile = filePathSetting.getFileWithoutCreate("csv-input", fileName);
 
         // ファイルの読み出しに利用するイテレータを生成
         try {
