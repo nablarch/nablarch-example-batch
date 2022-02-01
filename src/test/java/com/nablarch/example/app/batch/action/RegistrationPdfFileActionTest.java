@@ -1,17 +1,7 @@
 package com.nablarch.example.app.batch.action;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-
 import com.nablarch.example.app.entity.FileCreateRequest;
 import com.nablarch.example.app.entity.FileData;
-
 import nablarch.common.dao.UniversalDao;
 import nablarch.core.date.SystemTimeUtil;
 import nablarch.core.db.connection.AppDbConnection;
@@ -23,17 +13,28 @@ import nablarch.core.util.DateUtil;
 import nablarch.core.util.FileUtil;
 import nablarch.fw.DataReader;
 import nablarch.test.core.db.DbAccessTestSupport;
+import nablarch.test.junit5.extension.db.DbAccessTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
+
 
 /**
  * 常駐起動バッチテストクラス。
  * @author Nabu Rakutaro
  *
  */
-public class RegistrationPdfFileActionTest {
+@DbAccessTest
+class RegistrationPdfFileActionTest {
 
     /** 設定キー：入力ファイルパス */
     private static final String FILE_PATH_KEY_INPUT = "RegistrationPdfFile.batch.input";
@@ -46,12 +47,11 @@ public class RegistrationPdfFileActionTest {
     private static final String[] TEST_DATA_ID = { "1", "2" };
     private static final String[] TEST_DATA_NAME = { "test1.pdf", "test2.pdf" };
 
-    private DbAccessTestSupport transaction = new DbAccessTestSupport(getClass());
+    DbAccessTestSupport transaction;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    void setUp() throws Exception {
         SystemRepository.load(new DiContainer(new XmlComponentDefinitionLoader("registration-pdf-file.xml")));
-        transaction.beginTransactions();
 
         // FileCreateRequest初期化
         Date sysDate = SystemTimeUtil.getDate();
@@ -75,13 +75,9 @@ public class RegistrationPdfFileActionTest {
         fileData.setFileDataId(TEST_DATA_ID[0]);
         UniversalDao.delete(fileData);
     }
-    @After
-    public void tearDown() {
-        transaction.endTransactions();
-    }
 
     @Test
-    public void testCreateReader() {
+    void testCreateReader() {
         //テスト比較データ作成
         List<String> fileComparisonList = Arrays.asList(TEST_DATA_NAME);
 
@@ -107,7 +103,7 @@ public class RegistrationPdfFileActionTest {
     }
 
     @Test
-    public void testHandleFileCreateRequest() {
+    void testHandleFileCreateRequest() {
         FileUtil.copy(new File(SystemRepository.getString(FILE_PATH_KEY_TEST), TEST_DATA_NAME[0]), new File(SystemRepository.getString(FILE_PATH_KEY_INPUT), TEST_DATA_NAME[0]));
         //テスト対象クラス
         RegistrationPdfFileAction targetClass = new RegistrationPdfFileAction();
@@ -141,7 +137,7 @@ public class RegistrationPdfFileActionTest {
      * 成功時にステータスが適切に書き換わること。
      */
     @Test
-    public void testSuccess() {
+    void testSuccess() {
         //テスト対象クラス
         RegistrationPdfFileAction targetClass = new RegistrationPdfFileAction();
 
@@ -159,7 +155,7 @@ public class RegistrationPdfFileActionTest {
      * 失敗時にステータスが適切に書き換わること。
      */
     @Test
-    public void testFailure() {
+    void testFailure() {
         //テスト対象クラス
         RegistrationPdfFileAction targetClass = new RegistrationPdfFileAction();
 
