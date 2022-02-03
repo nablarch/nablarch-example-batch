@@ -1,22 +1,26 @@
 package com.nablarch.example.app.batch.action;
 
 import nablarch.test.core.batch.BatchRequestTestSupport;
-import org.junit.Test;
+import nablarch.test.junit5.extension.batch.BatchRequestTest;
+import org.junit.jupiter.api.Test;
 
 /**
  * 住所登録バッチのリクエスト単体テストクラス。
  */
-public class ImportZipCodeFileActionRequestTest extends BatchRequestTestSupport {
+@BatchRequestTest
+class ImportZipCodeFileActionRequestTest {
+
+    BatchRequestTestSupport support;
 
     /** 正常系のテスト。 */
     @Test
-    public void testNormalEnd() {
-        execute();
+    void testNormalEnd() {
+        support.execute(support.testName.getMethodName());
     }
 
     /** 異常系のテスト。 */
     @Test
-    public void testAbNormalEnd() {
-        execute();
+    void testAbNormalEnd() {
+        support.execute(support.testName.getMethodName());
     }
 }
