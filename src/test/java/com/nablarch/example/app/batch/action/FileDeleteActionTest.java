@@ -15,14 +15,15 @@ import nablarch.core.util.DateUtil;
 import nablarch.core.util.FileUtil;
 import nablarch.fw.DataReader;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 /**
  * 都度起動バッチテストクラス。
  * @author Nabu Rakutaro
  *
  */
-public class FileDeleteActionTest {
+class FileDeleteActionTest {
 
     /** 設定キー：作業ファイルパス */
     static final String FILE_PATH_KEY_WORK = "RegistrationPdfFile.batch.work";
@@ -32,13 +33,13 @@ public class FileDeleteActionTest {
     /** テストデータ */
     static final String[] TEST_DATA_NAME = { "test1.pdf", "test2.pdf" };
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    void setUp() throws Exception {
         SystemRepository.load(new DiContainer(new XmlComponentDefinitionLoader("file-delete.xml")));
     }
 
     @Test
-    public void testCreateReader() {
+    void testCreateReader() {
         FileUtil.copy(new File(SystemRepository.getString(FILE_PATH_KEY_TEST), TEST_DATA_NAME[0]), new File(SystemRepository.getString(FILE_PATH_KEY_WORK), TEST_DATA_NAME[0]));
         FileUtil.copy(new File(SystemRepository.getString(FILE_PATH_KEY_TEST), TEST_DATA_NAME[1]), new File(SystemRepository.getString(FILE_PATH_KEY_WORK), TEST_DATA_NAME[1]));
         List<File> fileComparisonList = new ArrayList<File>();
@@ -57,7 +58,7 @@ public class FileDeleteActionTest {
     }
 
     @Test
-    public void testHandleFile() {
+    void testHandleFile() {
         File target = new File(SystemRepository.getString(FILE_PATH_KEY_WORK), TEST_DATA_NAME[0]);
         FileUtil.copy(new File(SystemRepository.getString(FILE_PATH_KEY_TEST), TEST_DATA_NAME[0]), target);
         target.setLastModified(DateUtil.getDate(DateUtil.addDay(SystemTimeUtil.getDateString(), -2)).getTime());
