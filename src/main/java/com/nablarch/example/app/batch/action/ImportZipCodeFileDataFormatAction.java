@@ -21,8 +21,8 @@ import nablarch.fw.action.FileBatchAction;
 import nablarch.fw.launcher.CommandLine;
 import nablarch.fw.reader.ValidatableFileDataReader;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
 import java.util.Set;
 
 /**
