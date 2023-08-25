@@ -13,16 +13,16 @@
     <property name="endCodePoint" value="U+0039"/>
   </component>
 
+  <component name="スペース"
+      class="nablarch.core.validation.validator.unicode.LiteralCharsetDef">
+    <property name="allowedCharacters" value=" " />
+  </component>
+
   <component name="数字とスペース" class="nablarch.core.validation.validator.unicode.CompositeCharsetDef">
     <property name="charsetDefList">
       <list>
-        <component class="nablarch.core.validation.validator.unicode.RangedCharsetDef">
-          <property name="startCodePoint" value="U+0030"/>
-          <property name="endCodePoint" value="U+0039"/>
-        </component>
-        <component class="nablarch.core.validation.validator.unicode.LiteralCharsetDef">
-          <property name="allowedCharacters" value=" " />
-        </component>
+        <component-ref name="数字"/>
+        <component-ref name="スペース"/>
       </list>
     </property>
   </component>
