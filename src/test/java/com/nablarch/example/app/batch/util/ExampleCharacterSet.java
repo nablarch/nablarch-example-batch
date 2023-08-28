@@ -265,7 +265,7 @@ final class ExampleCharacterSet {
                     + "鏞鏸鐱鑅鑈閒隆﨩隝隯霳霻靃靍靏靑靕顗顥飯飼餧館馞驎髙髜魵魲鮏鮱鮻鰀鵰鵫鶴鸙黑";
 
     /**
-     * 使用不許可文字
+     * 文字種を指定しているドメインでは常に使用不許可となる文字集合
      */
     static final String FORBIDDEN_CHARS = LOWER_ALPHABET
             + UPPER_ALPHABET
