@@ -265,9 +265,9 @@ final class ExampleCharacterSet {
                     + "鏞鏸鐱鑅鑈閒隆﨩隝隯霳霻靃靍靏靑靕顗顥飯飼餧館馞驎髙髜魵魲鮏鮱鮻鰀鵰鵫鶴鸙黑";
 
     /**
-     * 制限文字
+     * 使用不許可文字
      */
-    static final String RESTRICTED_CHARS = LOWER_ALPHABET
+    static final String FORBIDDEN_CHARS = LOWER_ALPHABET
             + UPPER_ALPHABET
             + ASCII_SYMBOL
             + HANKAKU_KANA_CHARS
