@@ -1,7 +1,9 @@
 package com.nablarch.example.app.batch.action;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -40,11 +42,10 @@ class FileDeleteActionTest {
 
     @Test
     void testCreateReader() {
-        FileUtil.copy(new File(SystemRepository.getString(FILE_PATH_KEY_TEST), TEST_DATA_NAME[0]), new File(SystemRepository.getString(FILE_PATH_KEY_WORK), TEST_DATA_NAME[0]));
-        FileUtil.copy(new File(SystemRepository.getString(FILE_PATH_KEY_TEST), TEST_DATA_NAME[1]), new File(SystemRepository.getString(FILE_PATH_KEY_WORK), TEST_DATA_NAME[1]));
-        List<File> fileComparisonList = new ArrayList<File>();
-        fileComparisonList.add(new File(SystemRepository.getString(FILE_PATH_KEY_WORK), TEST_DATA_NAME[0]));
-        fileComparisonList.add(new File(SystemRepository.getString(FILE_PATH_KEY_WORK), TEST_DATA_NAME[1]));
+        File file1 = new File(SystemRepository.getString(FILE_PATH_KEY_WORK), TEST_DATA_NAME[0]);
+        File file2 = new File(SystemRepository.getString(FILE_PATH_KEY_WORK), TEST_DATA_NAME[1]);
+        FileUtil.copy(new File(SystemRepository.getString(FILE_PATH_KEY_TEST), TEST_DATA_NAME[0]), file1);
+        FileUtil.copy(new File(SystemRepository.getString(FILE_PATH_KEY_TEST), TEST_DATA_NAME[1]), file2);
 
         DataReader<File> reader = new FileDeleteAction().createReader(null);
 
@@ -54,7 +55,7 @@ class FileDeleteActionTest {
             fileList.add(reader.read(null));
         }
         //リーダーのファイル名取得確認
-        assertThat(fileList, is(fileComparisonList));
+        assertThat(fileList, is(containsInAnyOrder(file1, file2)));
     }
 
     @Test
