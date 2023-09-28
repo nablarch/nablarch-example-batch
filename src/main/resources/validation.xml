@@ -4,6 +4,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration http://tis.co.jp/nablarch/component-configuration">
 
+  <import file="nablarch/core/validation/charset-definition.xml"/>
+
   <component name="domainManager"
       class="com.nablarch.example.app.entity.core.validation.validator.ExampleDomainManager"/>
 
@@ -13,16 +15,16 @@
     <property name="endCodePoint" value="U+0039"/>
   </component>
 
+  <component name="スペース"
+      class="nablarch.core.validation.validator.unicode.LiteralCharsetDef">
+    <property name="allowedCharacters" value=" " />
+  </component>
+
   <component name="数字とスペース" class="nablarch.core.validation.validator.unicode.CompositeCharsetDef">
     <property name="charsetDefList">
       <list>
-        <component class="nablarch.core.validation.validator.unicode.RangedCharsetDef">
-          <property name="startCodePoint" value="U+0030"/>
-          <property name="endCodePoint" value="U+0039"/>
-        </component>
-        <component class="nablarch.core.validation.validator.unicode.LiteralCharsetDef">
-          <property name="allowedCharacters" value=" " />
-        </component>
+        <component-ref name="数字"/>
+        <component-ref name="スペース"/>
       </list>
     </property>
   </component>
@@ -39,9 +41,17 @@
     <property name="endCodePoint" value="U+0031"/>
   </component>
 
-  <component name="地名漢字" class="nablarch.core.validation.validator.unicode.RangedCharsetDef">
-    <property name="startCodePoint" value="U+3001" />
-    <property name="endCodePoint" value="U+9F8d" />
+  <component name="地名漢字" class="nablarch.core.validation.validator.unicode.CompositeCharsetDef">
+    <property name="charsetDefList">
+      <list>
+        <component-ref name="全角ひらがな"/>
+        <component-ref name="全角カタカナ"/>
+        <component-ref name="全角数字"/>
+        <component-ref name="全角英字"/>
+        <component-ref name="第1水準漢字"/>
+        <component-ref name="第2水準漢字"/>
+      </list>
+    </property>
   </component>
 
 </component-configuration>
