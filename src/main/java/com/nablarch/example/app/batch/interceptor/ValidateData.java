@@ -14,8 +14,8 @@ import nablarch.fw.ExecutionContext;
 import nablarch.fw.Interceptor;
 import nablarch.fw.Result;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
