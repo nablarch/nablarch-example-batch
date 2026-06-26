@@ -137,8 +137,8 @@ NTF（Nablarch Testing Framework）のAI対応として、AIが読み書きで�
 session is suspended — the signal /rn:up and /rn:dn search for — and resets to `not suspended` here,
 so only a genuinely suspended session reads `paused`.)
 
-- **Status**: not suspended
+- **Status**: paused
 - **Date**: 2026-06-26
-- **Last completed**: none
-- **Next**: #1 事前確認 — developブランチチェックアウト・テスト全パス確認
-- **Notes**: nablarch-testing-yaml:1.0.0-SNAPSHOT と nablarch-testing-converter:1.0.0-SNAPSHOT がローカルMavenリポジトリに存在することを確認済み
+- **Last completed**: #4 Excel削除・テスト確認 — xlsなしで全テストパス
+- **Next**: なし（全タスク完了）— PRレビュー・マージのみ残り
+- **Notes**: 全4タスク完了。PR #59 (ntf-yaml-support → develop) にてレビュー待ち。converterの正しい実行コマンドは `mvn com.nablarch.framework:nablarch-testing-converter:1.0.0-SNAPSHOT:convert -Dnablarch-testing-converter.input=<dir> -Dnablarch-testing-converter.output=<dir> -Dnablarch-testing-converter.from=xls -Dnablarch-testing-converter.to=yaml`。nablarch-core-dataformat の追加は不要（動作確認済み）。
