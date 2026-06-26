@@ -34,6 +34,7 @@ NTF（Nablarch Testing Framework）のAI対応として、AIが読み書きで�
 - テストはExcelファイルが存在しない状態で最終パスを確認する
 - git add は明示的なパス指定のみ（`git add -A` / `git add .` 禁止）
 - YAML変換後はサンプリングでExcelとYAMLの内容を比較してから削除する
+- サンプリング比較で差異が見つかった場合は修正せずユーザーに報告して停止する
 
 # Tasks
 
@@ -95,7 +96,7 @@ NTF（Nablarch Testing Framework）のAI対応として、AIが読み書きで�
   - `ZipCodeDataFormatFormTest.xls`
   - `ZipCodeFormTest.xls`
 - [ ] 変換後、各YAMLファイルについてExcelの内容と数件サンプリングで比較し、一致を確認する
-- [ ] サンプリング比較結果を `checks/task-3.md` に記録する
+- [ ] サンプリング比較結果を `checks/task-3.md` に記録する（差異があればユーザーに報告し、修正せずに止める）
 - [ ] 変換したYAMLファイルをコミット・プッシュする（Excelはまだ削除しない）
 - [ ] self-check (OK/NG per completion criterion, record in checks/task-3.md)
 - [ ] QA expert review (subagent)
@@ -104,7 +105,7 @@ NTF（Nablarch Testing Framework）のAI対応として、AIが読み書きで�
 **Completion criteria**:
 
 - 3件の `.xls` ファイルに対応するYAMLファイルが生成されている（参照PRの生成パターンに従ったパス）
-- サンプリング比較（各ファイル最低3件のデータ）でExcelとYAMLの内容が一致している
+- サンプリング比較（各ファイル最低3件のデータ）でExcelとYAMLの内容が一致している（差異があればユーザーに報告してタスク停止、修正は行わない）
 - 変換後のYAMLファイルがコミット・プッシュされている
 
 ### #4: Excel削除・テスト確認 — xlsファイルを削除してテスト全パス
