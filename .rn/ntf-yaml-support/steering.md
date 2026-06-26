@@ -3,7 +3,7 @@
 NTF（Nablarch Testing Framework）のAI対応として、AIが読み書きできないバイナリ形式のExcelテストデータ（`.xls`）をYAML形式に移行する。
 参照: https://github.com/Fintan-contents/nablarch-system-development-guide/pull/211
 
-対象は `nablarch-example-batch` リポジトリの以下3ファイル：
+対象は `nablarch-example-batch` リポジトリに存在するNTFのExcelテストデータ全件（現時点で3件、いずれも `.xls`）：
 - `src/test/java/com/nablarch/example/app/batch/action/ImportZipCodeFileActionRequestTest.xls`
 - `src/test/java/com/nablarch/example/app/batch/form/ZipCodeDataFormatFormTest.xls`
 - `src/test/java/com/nablarch/example/app/batch/form/ZipCodeFormTest.xls`
@@ -125,7 +125,7 @@ NTF（Nablarch Testing Framework）のAI対応として、AIが読み書きで�
 
 **Completion criteria**:
 
-- 3件の `.xls` ファイルが全て削除されている
+- NTFのExcelテストデータ（`.xls` / `.xlsx`）が全て削除されている
 - Excelファイルが存在しない状態で `mvn test` が全テストパス（BUILD SUCCESS）で完了している
 
 # Decisions
