@@ -137,4 +137,8 @@ NTF（Nablarch Testing Framework）のAI対応として、AIが読み書きで�
 session is suspended — the signal /rn:up and /rn:dn search for — and resets to `not suspended` here,
 so only a genuinely suspended session reads `paused`.)
 
-- **Status**: not suspended
+- **Status**: paused
+- **Date**: 2026-06-26
+- **Last completed**: #4 Excel削除・テスト確認 — xlsなしで全テストパス
+- **Next**: なし（全タスク完了）— Acceptance criteriaの確認・PRマージのみ残り
+- **Notes**: 全4タスク完了。PR #59 (ntf-yaml-support → develop) にてレビュー待ち。YAML変更→テスト失敗の動作確認済み（アサートエラーが正しく出ることを確認）。次のアクションはAcceptance criteriaの最終チェックとPRマージ。
