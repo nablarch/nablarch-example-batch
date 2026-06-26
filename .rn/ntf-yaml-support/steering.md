@@ -67,15 +67,15 @@ NTF（Nablarch Testing Framework）のAI対応として、AIが読み書きで�
 
 **Steps**:
 
-- [ ] `pom.xml` に `nablarch-testing-yaml:1.0.0-SNAPSHOT`（test scope）を追加する
-- [ ] `pom.xml` に `nablarch-testing-converter:1.0.0-SNAPSHOT`（test scope）を追加する
-- [ ] `unit-test.xml` に `yamlInterpreters` リストと `YamlTestDataParser` コンポーネントを追加する（参照PR #211の `proman-batch/src/test/resources/unit-test.xml` パッチと同内容）
-- [ ] `mvn test -Dsurefire.failIfNoSpecifiedTests=false` などで依存関係が解決できることを確認する
-- [ ] self-check (OK/NG per completion criterion, record in checks/task-2.md)
-- [ ] QA expert review (subagent)
-- [ ] language expert review (subagent)
-- [ ] software-engineering expert review (subagent)
-- [ ] user review
+- [x] `pom.xml` に `nablarch-testing-yaml:1.0.0-SNAPSHOT`（test scope）を追加する
+- [x] `pom.xml` に `nablarch-testing-converter:1.0.0-SNAPSHOT`（test scope）を追加する
+- [x] `unit-test.xml` に `yamlInterpreters` リストと `YamlTestDataParser` コンポーネントを追加する（参照PR #211の `proman-batch/src/test/resources/unit-test.xml` パッチと同内容）
+- [x] `mvn test -Dsurefire.failIfNoSpecifiedTests=false` などで依存関係が解決できることを確認する
+- [x] self-check (OK/NG per completion criterion, record in checks/task-2.md)
+- [x] QA expert review (subagent)
+- [x] language expert review (subagent)
+- [x] software-engineering expert review (subagent)
+- [x] user review
 
 **Completion criteria**:
 
