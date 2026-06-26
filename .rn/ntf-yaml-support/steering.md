@@ -91,16 +91,16 @@ NTF（Nablarch Testing Framework）のAI対応として、AIが読み書きで�
 
 **Steps**:
 
-- [ ] `nablarch-testing-converter` を使って3件の `.xls` ファイルをYAML変換する
+- [x] `nablarch-testing-converter` を使って3件の `.xls` ファイルをYAML変換する
   - `ImportZipCodeFileActionRequestTest.xls`
   - `ZipCodeDataFormatFormTest.xls`
   - `ZipCodeFormTest.xls`
-- [ ] 変換後、各YAMLファイルについてExcelの内容と数件サンプリングで比較し、一致を確認する
-- [ ] サンプリング比較結果を `checks/task-3.md` に記録する（差異があればユーザーに報告し、修正せずに止める）
-- [ ] 変換したYAMLファイルをコミット・プッシュする（Excelはまだ削除しない）
-- [ ] self-check (OK/NG per completion criterion, record in checks/task-3.md)
-- [ ] QA expert review (subagent)
-- [ ] user review
+- [x] 変換後、各YAMLファイルについてExcelの内容と数件サンプリングで比較し、一致を確認する
+- [x] サンプリング比較結果を `checks/task-3.md` に記録する（差異があればユーザーに報告し、修正せずに止める）
+- [x] 変換したYAMLファイルをコミット・プッシュする（Excelはまだ削除しない）
+- [x] self-check (OK/NG per completion criterion, record in checks/task-3.md)
+- [x] QA expert review (subagent)
+- [x] user review
 
 **Completion criteria**:
 
