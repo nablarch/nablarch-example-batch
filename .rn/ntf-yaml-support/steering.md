@@ -46,13 +46,13 @@ NTF（Nablarch Testing Framework）のAI対応として、AIが読み書きで�
 
 **Steps**:
 
-- [ ] `develop` ブランチの最新をfetchし、`ntf-yaml-support` ブランチを作成してチェックアウトする
-- [ ] `mvn test` を実行し、全テストがパスすることを確認する
-- [ ] 結果を `checks/task-1.md` に記録する（self-check列のみ）
-- [ ] テスト結果をコミット・プッシュする（steering.mdを除くcheckファイルのみ）
-- [ ] self-check (OK/NG per completion criterion, record in checks/task-1.md)
-- [ ] QA expert review (subagent)
-- [ ] user review
+- [x] `develop` ブランチの最新をfetchし、`ntf-yaml-support` ブランチを作成してチェックアウトする
+- [x] `mvn test` を実行し、全テストがパスすることを確認する
+- [x] 結果を `checks/task-1.md` に記録する（self-check列のみ）
+- [x] テスト結果をコミット・プッシュする（steering.mdを除くcheckファイルのみ）
+- [x] self-check (OK/NG per completion criterion, record in checks/task-1.md)
+- [x] QA expert review (subagent)
+- [x] user review
 
 **Completion criteria**:
 
