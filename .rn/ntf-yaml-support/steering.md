@@ -116,13 +116,13 @@ NTF（Nablarch Testing Framework）のAI対応として、AIが読み書きで�
 
 **Steps**:
 
-- [ ] 3件の `.xls` ファイルを削除する
-- [ ] `mvn test` を実行し、Excelなしの状態で全テストがパスすることを確認する
-- [ ] テスト結果（BUILD SUCCESS）を `checks/task-4.md` に記録する
-- [ ] xlsファイル削除をコミット・プッシュする
-- [ ] self-check (OK/NG per completion criterion, record in checks/task-4.md)
-- [ ] QA expert review (subagent)
-- [ ] user review
+- [x] 3件の `.xls` ファイルを削除する
+- [x] `mvn test` を実行し、Excelなしの状態で全テストがパスすることを確認する
+- [x] テスト結果（BUILD SUCCESS）を `checks/task-4.md` に記録する
+- [x] xlsファイル削除をコミット・プッシュする
+- [x] self-check (OK/NG per completion criterion, record in checks/task-4.md)
+- [x] QA expert review (subagent)
+- [x] user review
 
 **Completion criteria**:
 
