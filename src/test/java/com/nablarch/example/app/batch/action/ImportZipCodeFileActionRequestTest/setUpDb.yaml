@@ -1,0 +1,7 @@
+setup_tables:
+  - table: "BUSINESS_DATE"
+    rows:
+      - SEGMENT_ID: "01"
+        BIZ_DATE: "2015-04-15 00:00:00"
+  - table: "ZIP_CODE_DATA"
+    rows: []

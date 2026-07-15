@@ -1,0 +1,59 @@
+list_maps:
+  - id: "testShots"
+    rows:
+      - description: "バリデーションエラーが発生するレコードである場合"
+        diConfig: "classpath:import-zip-code-file.xml"
+        expectedLog: "expectedLog_1"
+        expectedStatusCode: "0"
+        expectedTable: "1"
+        no: "1"
+        requestPath: "ImportZipCodeFileAction/ImportZipCodeFile"
+        setUpFile: "1"
+        setUpTable: ""
+        userId: "105"
+  - id: "expectedLog_1"
+    rows:
+      - logLevel: "WARN"
+        message1: "validation error has occurred. , error prop=[zipCode7digit],error message=[7文字で入力\
+  してください。], line number=[1]"
+      - logLevel: "WARN"
+        message1: "validation error has occurred. , error prop=[localGovernmentCode],error message=[5文\
+  字で入力してください。], line number=[1]"
+      - logLevel: "WARN"
+        message1: "validation error has occurred. , error prop=[zipCode5digit],error message=[5文字で入力\
+  してください。], line number=[1]"
+
+setup_files:
+  - group_id: "1"
+    path: "work/test/importZipCode/importZipCode.csv"
+    type: "variable"
+    directives:
+      file-type: "Variable"
+      record-separator: "CRLF"
+      text-encoding: "UTF-8"
+      field-separator: ","
+    records:
+      - record_type: "データレコード"
+        fields:
+          - {name: "localGovernmentCode", type: "半角"}
+          - {name: "zipCode5digit", type: "半角"}
+          - {name: "zipCode7digit", type: "半角"}
+          - {name: "prefectureKana", type: "半角"}
+          - {name: "cityKana", type: "半角"}
+          - {name: "addressKana", type: "半角"}
+          - {name: "prefectureKanji", type: "全角"}
+          - {name: "cityKanji", type: "全角"}
+          - {name: "addressKanji", type: "全角"}
+          - {name: "multipleZipCodes", type: "半角"}
+          - {name: "numberedEveryKoaza", type: "半角"}
+          - {name: "addressWithChome", type: "半角"}
+          - {name: "multipleAddress", type: "半角"}
+          - {name: "updateData", type: "半角"}
+          - {name: "updateDataReason", type: "半角"}
+        rows:
+          - ["011010000", "060000", "06000000", "ﾎｯｶｲﾄﾞｳ", "ｻｯﾎﾟﾛｼﾁｭｳｵｳｸ", "ｲｶﾆｹｲｻｲｶﾞﾅｲﾊﾞｱｲ", "北海道", "札幌市中央区", "以下に掲載がない場合", "0", "0", "0", "0", "0", "0"]
+
+expected_tables:
+  - group_id: "1"
+    table: "ZIP_CODE_DATA"
+    rows: []
