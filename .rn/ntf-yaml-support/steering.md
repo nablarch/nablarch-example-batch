@@ -138,7 +138,7 @@ session is suspended — the signal /rn:up and /rn:dn search for — and resets 
 so only a genuinely suspended session reads `paused`.)
 
 - **Status**: paused
-- **Date**: 2026-06-26
-- **Last completed**: #4 Excel削除・テスト確認 — xlsなしで全テストパス
-- **Next**: なし（全タスク完了）— Acceptance criteriaの確認・PRマージのみ残り
-- **Notes**: 全4タスク完了。PR #59 (ntf-yaml-support → develop) にてレビュー待ち。YAML変更→テスト失敗の動作確認済み（アサートエラーが正しく出ることを確認）。次のアクションはAcceptance criteriaの最終チェックとPRマージ。
+- **Date**: 2026-07-15
+- **Last completed**: #4 Excel削除・テスト確認 — xlsなしで全テストパス（追加: converterをMavenプラグインとしてpom.xmlに組み込み、全テストパス確認済み）
+- **Next**: なし（全タスク完了）— PRマージのみ残り
+- **Notes**: nablarch-testing-converterをtest依存からbuildプラグインに変更済み（854db58）。mvn nablarch-testing-converter:convert でXLS→YAML変換可能。PR #59 (ntf-yaml-support → develop) にてレビュー待ち。
