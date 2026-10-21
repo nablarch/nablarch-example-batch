@@ -48,17 +48,17 @@
 **Purpose**: `pom.xml` に `nablarch-testing-yaml`（test 依存）と `nablarch-testing-converter`（`<build><plugins>` のビルドプラグイン）を追加し、`YamlTestDataParser`（`testDataParser`）を testdata.html の設定例どおりに追加する。
 **Prerequisites**: #1
 **Steps**:
-- [ ] `pom.xml` に `nablarch-testing-yaml:1.0.0-SNAPSHOT`（test scope）を追加する
-- [ ] `pom.xml` の `<build><plugins>` に `nablarch-testing-converter:1.0.0-SNAPSHOT` を追加する（`<configuration>` に from=xls / to=yaml / input / output / overwrite）
-- [ ] 実行中にモック等が `testDataParser` 経由でテストデータを読む構成か判定する
-- [ ] 判定結果に応じて `YamlTestDataParser` を配置する（`interpreters` は `dateTimeInterpreter` → `compositeInterpreter` の2つのみ）
-- [ ] `mvn dependency:resolve` / `mvn help:describe` で依存・プラグインの解決を確認する
-- [ ] 変更したファイルをコミットする
-- [ ] self-check
-- [ ] QA expert review (Agent: general-purpose / Opus)
-- [ ] language expert review (Agent: general-purpose / Opus)
-- [ ] software-engineering expert review (Agent: general-purpose / Opus)
-- [ ] user review
+- [x] `pom.xml` に `nablarch-testing-yaml:1.0.0-SNAPSHOT`（test scope）を追加する（`nablarch-testing-junit5` の直後）
+- [x] `pom.xml` の `<build><plugins>` に `nablarch-testing-converter:1.0.0-SNAPSHOT` を追加する（plugin 直下 `<configuration>` に from=xls / to=yaml / input=output=`${project.basedir}/src/test/java` / overwrite=true。pom.xml の CRLF 改行を維持）
+- [x] 実行中にモック等が `testDataParser` 経由でテストデータを読む構成か判定する → 非該当（テストは BatchRequestTestSupport / EntityTestSupport / DbAccessTestSupport のみ。sendSync・応答電文・メッセージングモックの参照なし）
+- [x] `YamlTestDataParser` を `src/test/resources/unit-test.xml` に配置する（`test-data.xml` / `test-transaction.xml` の import 直後・`dbInfo` 定義より後。`interpreters` は `dateTimeInterpreter` → `compositeInterpreter` の2つのみを直接 `<list>` 記載）
+- [x] `mvn -B -o dependency:resolve`（yaml 依存 test スコープで解決・BUILD SUCCESS）/ `mvn -B -o help:describe -Dplugin=com.nablarch.framework:nablarch-testing-converter:1.0.0-SNAPSHOT`（`nablarch-testing-converter:convert` ゴール表示・BUILD SUCCESS）で確認する
+- [x] 変更したファイルをコミットする
+- [x] self-check
+- [x] QA expert review (Agent: general-purpose / Opus)
+- [x] language expert review (Agent: general-purpose / Opus)
+- [x] software-engineering expert review (Agent: general-purpose / Opus)
+- [ ] user review（全 task 完了後にまとめて実施）
 **Completion criteria**:
 - `pom.xml` に `nablarch-testing-yaml:1.0.0-SNAPSHOT` が test スコープで追加されている
 - `pom.xml` の `<build><plugins>` に `nablarch-testing-converter:1.0.0-SNAPSHOT` がビルドプラグインとして追加されている
