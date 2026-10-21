@@ -20,6 +20,11 @@
 - `scripts/XlsDump.java`（Task #3）: サンプリング比較用。`.xls` の全シートの非空セルを TSV（シート/行/列/値）でダンプする。`java -cp ~/.m2/repository/org/apache/poi/poi/3.8/poi-3.8.jar XlsDump.java <file.xls>`（POI 3.8 は NTF と同じ版）
 - `scripts/compare_xls_yaml.py`（Task #3）: サンプリング比較用。XlsDump の TSV と converter 出力 YAML を全データ行・全列で突合し、各 YAML から3行（3件未満は全件）をサンプル出力する。生値比較（RAW）と NTF Excel 解釈（NullInterpreter/QuotationTrimmer）適用後の比較を行う。`python3 -I compare_xls_yaml.py <dump.tsv> <yaml_dir>`。結果は `sampling/compare-*.txt`
 
+## Status
+- 全 task（#1〜#5）完了。user review 待ち（全 task まとめて実施）。push はユーザーが行う。
+- コミット: ベースライン `8aa2d9c` → task-1 → task-2 `d94c592` → task-3 `dd2b505` → task-4 `a0d9bd6` → task-5（本コミット。task-4 の QA 記録を含む）
+- 今後の検討事項（レビューでの任意改善提案）: converter の overwrite/プロファイル隔離、SNAPSHOT 依存のバージョン一元化とリリース版切替、テストデータ YAML 一本化の明文化
+
 ## Tasks
 
 ### #1: ベースライン化（developと同一状態）し、全PASSを確認する
@@ -102,13 +107,13 @@
 **Purpose**: Excel なしで全テストがパスすることを確認する。
 **Prerequisites**: #4
 **Steps**:
-- [ ] `mvn -B clean test` が BUILD SUCCESS になることを確認する
-- [ ] テストログで YamlTestDataParser が実際に使われていることを確認する
-- [ ] self-check
-- [ ] QA expert review (Agent: general-purpose / Opus)
-- [ ] language expert review (Agent: general-purpose / Opus)
-- [ ] software-engineering expert review (Agent: general-purpose / Opus)
-- [ ] user review
+- [x] `mvn -B clean test` が BUILD SUCCESS になることを確認する（12件全パス、Excel 0件。ログ `sampling/task5-test-log.txt`）
+- [x] テストログで YamlTestDataParser が実際に使われていることを確認する（testDataParser の YamlTestDataParser への上書きログ・YamlTestDataParser の INFO ログ）
+- [x] self-check
+- [x] QA expert review (Agent: general-purpose / Opus)
+- [x] language expert review (Agent: general-purpose / Opus)
+- [x] software-engineering expert review (Agent: general-purpose / Opus)
+- [ ] user review（全 task 完了後にまとめて実施）
 **Completion criteria**:
 - `mvn test` が BUILD SUCCESS で終了する（全テストパス、Excel ファイルなし）
 - テストログで YamlTestDataParser が実際に使われていることが確認できる
