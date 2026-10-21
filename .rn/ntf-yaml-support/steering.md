@@ -21,8 +21,8 @@
 - `scripts/compare_xls_yaml.py`（Task #3）: サンプリング比較用。XlsDump の TSV と converter 出力 YAML を全データ行・全列で突合し、各 YAML から3行（3件未満は全件）をサンプル出力する。生値比較（RAW）と NTF Excel 解釈（NullInterpreter/QuotationTrimmer）適用後の比較を行う。`python3 -I compare_xls_yaml.py <dump.tsv> <yaml_dir>`。結果は `sampling/compare-*.txt`
 
 ## Status
-- 全 task（#1〜#5）完了。user review 待ち（全 task まとめて実施）。push はユーザーが行う。
-- コミット: ベースライン `8aa2d9c` → task-1 → task-2 `d94c592` → task-3 `dd2b505` → task-4 `a0d9bd6` → task-5（本コミット。task-4 の QA 記録を含む）
+- 全 task（#1〜#5）完了。user review OK（全 task まとめて実施）。push はユーザーが行う。
+- コミット: ベースライン `8aa2d9c` → task-1 → task-2 `d94c592` → task-3 `dd2b505` → task-4 `a0d9bd6` → task-5 `553888d`（task-4 の QA 記録を含む）→ user review 記録
 - 今後の検討事項（レビューでの任意改善提案）: converter の overwrite/プロファイル隔離、SNAPSHOT 依存のバージョン一元化とリリース版切替、テストデータ YAML 一本化の明文化
 
 ## Tasks
@@ -43,7 +43,7 @@
 - [x] 変更ファイルをコミットする
 - [x] self-check
 - [x] QA expert review (Agent: general-purpose / Opus)
-- [ ] user review（全 task 完了後にまとめて実施）
+- [x] user review（全 task 完了後にまとめて実施 → OK）
 **Completion criteria**:
 - 既存の `ntf-yaml-support` ブランチ上で作業しており、コミット履歴が維持されている（過去の移行コミットが残っている）
 - ブランチの既存先端の上に、ワーキングツリー全体が `develop` と同一内容になる新規コミットが1つ積まれている
@@ -64,7 +64,7 @@
 - [x] QA expert review (Agent: general-purpose / Opus)
 - [x] language expert review (Agent: general-purpose / Opus)
 - [x] software-engineering expert review (Agent: general-purpose / Opus)
-- [ ] user review（全 task 完了後にまとめて実施）
+- [x] user review（全 task 完了後にまとめて実施 → OK）
 **Completion criteria**:
 - `pom.xml` に `nablarch-testing-yaml:1.0.0-SNAPSHOT` が test スコープで追加されている
 - `pom.xml` の `<build><plugins>` に `nablarch-testing-converter:1.0.0-SNAPSHOT` がビルドプラグインとして追加されている
@@ -98,7 +98,7 @@
 - [x] Excel 削除をコミットする（task-3 の変換ログ `sampling/convert-log.txt` も同梱）
 - [x] self-check
 - [x] QA expert review (Agent: general-purpose / Opus)
-- [ ] user review（全 task 完了後にまとめて実施）
+- [x] user review（全 task 完了後にまとめて実施 → OK）
 **Completion criteria**:
 - 変換対象だった全 Excel ファイルが削除されている
 - 削除がコミットされている
@@ -113,7 +113,7 @@
 - [x] QA expert review (Agent: general-purpose / Opus)
 - [x] language expert review (Agent: general-purpose / Opus)
 - [x] software-engineering expert review (Agent: general-purpose / Opus)
-- [ ] user review（全 task 完了後にまとめて実施）
+- [x] user review（全 task 完了後にまとめて実施 → OK）
 **Completion criteria**:
 - `mvn test` が BUILD SUCCESS で終了する（全テストパス、Excel ファイルなし）
 - テストログで YamlTestDataParser が実際に使われていることが確認できる
