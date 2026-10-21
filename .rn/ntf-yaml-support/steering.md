@@ -17,7 +17,8 @@
 
 ## Scripts
 - `.rn/ntf-yaml-support/scripts/` 配下に格納する。作成したスクリプトは用途をここと該当 `checks/task-N.md` に記載する。
-- （Task #1 時点では作成なし）
+- `scripts/XlsDump.java`（Task #3）: サンプリング比較用。`.xls` の全シートの非空セルを TSV（シート/行/列/値）でダンプする。`java -cp ~/.m2/repository/org/apache/poi/poi/3.8/poi-3.8.jar XlsDump.java <file.xls>`（POI 3.8 は NTF と同じ版）
+- `scripts/compare_xls_yaml.py`（Task #3）: サンプリング比較用。XlsDump の TSV と converter 出力 YAML を全データ行・全列で突合し、各 YAML から3行（3件未満は全件）をサンプル出力する。生値比較（RAW）と NTF Excel 解釈（NullInterpreter/QuotationTrimmer）適用後の比較を行う。`python3 -I compare_xls_yaml.py <dump.tsv> <yaml_dir>`。結果は `sampling/compare-*.txt`
 
 ## Tasks
 
@@ -69,15 +70,15 @@
 **Purpose**: `nablarch-testing-converter` で Excel テストデータを YAML に変換し、ソースツリー内に配置してサンプリングで内容を確認する。
 **Prerequisites**: #2
 **Steps**:
-- [ ] 対象 Excel ファイルの所在を確認する（Task #1 時点: `src/test/java` 配下に `.xls` 3件）
-- [ ] 同名 `.xls` / `.xlsx` の併存有無を確認する
-- [ ] converter README の手順に従い全 Excel を YAML 変換する
-- [ ] 各 YAML を Excel とサンプリング比較する（各ファイル最低3件）
-- [ ] 結果を `checks/task-3.md` の Sampling Comparison に記録する
-- [ ] YAML をコミットする（Excel はまだ削除しない）
-- [ ] self-check
-- [ ] QA expert review (Agent: general-purpose / Opus)
-- [ ] user review
+- [x] 対象 Excel ファイルの所在を確認する（`src/test/java` 配下に `.xls` 3件）
+- [x] 同名 `.xls` / `.xlsx` の併存有無を確認する（併存なし）
+- [x] converter README の手順に従い全 Excel を YAML 変換する（3ファイル→YAML 7本）
+- [x] 各 YAML を Excel とサンプリング比較する（全行比較。`testSingleValidation` 2ファイルで `input1` の外側ダブルクォート有無の表記差 各16セルを検出。NTF 解釈後は一致）→ ルールに従い停止・ユーザーへ報告 → ユーザー判断「表記差は一致とみなし続行」
+- [x] 結果を `checks/task-3.md` の Sampling Comparison に記録する
+- [x] YAML をコミットする（Excel はまだ削除しない）
+- [x] self-check
+- [x] QA expert review (Agent: general-purpose / Opus)
+- [x] user review（差異報告時に実施。表記差は一致とみなし続行の判断）
 **Completion criteria**:
 - 変換対象の全 Excel に対応する YAML が生成されている
 - サンプリング比較で Excel と YAML の内容が一致している
