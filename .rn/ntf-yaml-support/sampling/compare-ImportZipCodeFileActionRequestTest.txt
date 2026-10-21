@@ -1,0 +1,8 @@
+SAMPLE	ImportZipCodeFileActionRequestTest/setUpDb.yaml	1	SETUP_TABLE=BUSINESS_DATE 行1 (2列比較)	SEGMENT_ID='01'	SEGMENT_ID='01'	OK
+SAMPLE	ImportZipCodeFileActionRequestTest/testAbNormalEnd.yaml	5	LIST_MAP=testShots 行1 (10列比較)	no='1'	no='1'	OK
+SAMPLE	ImportZipCodeFileActionRequestTest/testAbNormalEnd.yaml	5	LIST_MAP=expectedLog_1 行2 (2列比較)	logLevel='WARN'	logLevel='WARN'	OK
+SAMPLE	ImportZipCodeFileActionRequestTest/testAbNormalEnd.yaml	5	SETUP_VARIABLE[1]=work/test/importZipCode/importZipCode.csv (データレコード) 行1 (15列比較)	localGovernmentCode='011010000'	localGovernmentCode='011010000'	OK
+SAMPLE	ImportZipCodeFileActionRequestTest/testNormalEnd.yaml	4	LIST_MAP=testShots 行1 (10列比較)	no='1'	no='1'	OK
+SAMPLE	ImportZipCodeFileActionRequestTest/testNormalEnd.yaml	4	EXPECTED_TABLE[1]=ZIP_CODE_DATA 行1 (15列比較)	LOCAL_GOVERNMENT_CODE='01101'	LOCAL_GOVERNMENT_CODE='01101'	OK
+SAMPLE	ImportZipCodeFileActionRequestTest/testNormalEnd.yaml	4	SETUP_VARIABLE[1]=work/test/importZipCode/importZipCode.csv (データレコード) 行1 (15列比較)	localGovernmentCode='01101'	localGovernmentCode='01101'	OK
+CHECKED_ROWS	10	RAW_DIFF	0	ERRORS	0
