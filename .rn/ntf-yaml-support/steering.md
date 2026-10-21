@@ -88,12 +88,12 @@
 **Purpose**: 変換対象だった Excel を削除してコミットする。
 **Prerequisites**: #3
 **Steps**:
-- [ ] 変換対象となった Excel ファイルを削除する
-- [ ] 削除結果（残存Excel 0件）を `checks/task-4.md` に記録する
-- [ ] Excel 削除をコミットする
-- [ ] self-check
-- [ ] QA expert review (Agent: general-purpose / Opus)
-- [ ] user review
+- [x] 変換対象となった Excel ファイル（`.xls` 3件）を `git rm` で削除する
+- [x] 削除結果（残存Excel 0件）を `checks/task-4.md` に記録する
+- [x] Excel 削除をコミットする（task-3 の変換ログ `sampling/convert-log.txt` も同梱）
+- [x] self-check
+- [x] QA expert review (Agent: general-purpose / Opus)
+- [ ] user review（全 task 完了後にまとめて実施）
 **Completion criteria**:
 - 変換対象だった全 Excel ファイルが削除されている
 - 削除がコミットされている

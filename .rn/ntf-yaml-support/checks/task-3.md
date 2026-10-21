@@ -6,7 +6,7 @@
 
 | Criterion | Self-check | Evidence | QA | QA Evidence |
 |---|---|---|---|---|
-| 変換対象の全 Excel に対応する YAML が生成されている | OK | 対象 `.xls` 3件（`.xlsx` なし）を `mvn -B -o com.nablarch.framework:nablarch-testing-converter:1.0.0-SNAPSHOT:convert` で変換（`Converted 3 file(s).`、WARN なし）。全シート 7 枚に対し YAML 7 本（シート過不足なしをスクリプトで確認） | OK | `src/test/java` の Excel は `.xls` 3件のみ。XlsDump 再実行で全7シートと YAML 7本が1対1対応。`convert.log` に `Converted 3 file(s).` / BUILD SUCCESS |
+| 変換対象の全 Excel に対応する YAML が生成されている | OK | 対象 `.xls` 3件（`.xlsx` なし）を `mvn -B -o com.nablarch.framework:nablarch-testing-converter:1.0.0-SNAPSHOT:convert` で変換（`Converted 3 file(s).`、WARN なし）。全シート 7 枚に対し YAML 7 本（シート過不足なしをスクリプトで確認） | OK | `src/test/java` の Excel は `.xls` 3件のみ。XlsDump 再実行で全7シートと YAML 7本が1対1対応。変換ログに `Converted 3 file(s).` / BUILD SUCCESS |
 | サンプリング比較で Excel と YAML の内容が一致している | OK | 全データ行（計 102 行）を比較。サンプル（各ファイル3件、元データ1件は全件）は生値で全一致。生値では `ZipCodeFormTest` / `ZipCodeDataFormatFormTest` の `testSingleValidation` で `input1` 各16セルが不一致（Excel `"0"` → YAML `0` 等、外側ダブルクォート除去）。NTF の Excel 用インタープリタ（NullInterpreter / QuotationTrimmer）適用後の値では全行一致。それ以外の不一致なし。表記差はユーザー判断により一致とみなす | OK | スクリプト再実行で記録と同結果（102行、ERRORS 0、RAW_DIFF 各16セル）。Excel 側の `"` を含むセルは各ファイル16個で全て当該表記差。`null`・改行・タブを含むセル0件。サンプル外の行（例: ZipCodeFormTest testCharsetAndLength 行7、testSingleValidation 行25、ZipCodeDataFormatFormTest testCharsetAndLength 行3 等）をスクリプトとは独立に突合し一致。Excel 側の全14ブロックが YAML に対応 |
 | 変換後の YAML がコミットされている | OK | ユーザー判断後、YAML 7本（＋比較スクリプト・結果）を task-3 コミットに含める | OK | YAML 7本・scripts 2本・sampling 4本・checks/task-3.md・steering.md が揃っている。未追跡 `.idea/` はコミット対象外 |
 
@@ -23,7 +23,7 @@ N/A — no code changes in this task.
 
 ## Sampling Comparison（task-3 のみ）
 
-比較スクリプト: `.rn/ntf-yaml-support/scripts/XlsDump.java`（Excel 全セルを TSV ダンプ）＋ `.rn/ntf-yaml-support/scripts/compare_xls_yaml.py`（ダンプと YAML を全データ行・全列で突合し、各 YAML から3行をサンプルとして出力）。結果: `.rn/ntf-yaml-support/sampling/compare-*.txt`。
+比較スクリプト: `.rn/ntf-yaml-support/scripts/XlsDump.java`（Excel 全セルを TSV ダンプ）＋ `.rn/ntf-yaml-support/scripts/compare_xls_yaml.py`（ダンプと YAML を全データ行・全列で突合し、各 YAML から3行をサンプルとして出力）。結果: `.rn/ntf-yaml-support/sampling/compare-*.txt`、変換ログ: `.rn/ntf-yaml-support/sampling/convert-log.txt`（`.gitignore` の `*.log` 除外を避けるため改名し task-4 コミットで追加）。
 
 | YAML ファイル | 比較件数 | レコードキー/行 | Excel 値 | YAML 値 | 一致 |
 | --- | --- | --- | --- | --- | --- |
